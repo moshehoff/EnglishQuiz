@@ -14,6 +14,7 @@ export const LABEL_TO_CATEGORY = [
   [/past continuous.*\+ past simple|past simple.*past continuous/i, 'past_continuous_mixed'],
   [/past continuous/i, 'past_continuous'],
   [/second conditional/i, 'second_conditional'],
+  [/third conditional/i, 'third_conditional'],
   [/first conditional.*שליל|first conditional.*negative/i, 'first_conditional_negative'],
   [/first conditional/i, 'first_conditional'],
   [/past simple passive/i, 'past_passive'],

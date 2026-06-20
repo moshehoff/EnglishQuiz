@@ -12,6 +12,9 @@ export const HEBREW_EXPLANATIONS = {
   second_conditional:
     'Second Conditional (תנאי דמיוני או לא מציאותי) משמש כשהתנאי לא מתקיים במציאות. החלק עם If נמצא ב-Past Simple, והחלק השני ב-would + פועל. לעיתים משתמשים ב-were לכל הנושאים: "If I were you". הפועל "win" בעבר: won.',
 
+  third_conditional:
+    'Third Conditional לתנאים שלא התקיימו בעבר. If + had + past participle → would have + past participle. "If she had studied harder, she would have passed" — אם הייתה לומדת יותר, הייתה עוברת. משמש להצטערות או ניתוח עבר.',
+
   past_passive:
     'Past Simple Passive (סביל בעבר פשוט) מתאר פעולה שבוצעה על ידי מישהו אחר בעבר. המבנה: was/were + past participle. עם נושא יחיד: was made, עם רבים: were made. הפועל "make" בלתי רגיל: make → made → made.',
 

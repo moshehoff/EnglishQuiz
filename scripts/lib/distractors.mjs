@@ -440,6 +440,10 @@ function futureVariants(answer) {
   return []
 }
 
+function ppAdverbVariants(answer) {
+  return ['already', 'yet', 'just', 'ever', 'never', 'for', 'since'].filter((w) => norm(w) !== norm(answer))
+}
+
 function conditionalVariants(answer) {
   const a = answer.trim()
   const parts = []
@@ -601,7 +605,9 @@ function partDistractors(part) {
     return ['do', 'does', 'did', 'is', 'are', 'was', 'were', 'have', 'has']
   }
   if (/^(was|were|is|are|am)\s+\S+/i.test(p)) return pastContinuousVariants(p)
-  if (/^(have|has)\s/i.test(p)) return presentPerfectVariants(p)
+  if (/^(have|has|had)\s/i.test(p)) return presentPerfectVariants(p)
+  if (/^would have\s/i.test(p)) return conditionalVariants(p)
+  if (/^would not have\s/i.test(p)) return conditionalVariants(p)
   if (/^(don't|doesn't|didn't)\s/i.test(p)) return presentSimpleNegativeVariants(p)
   if (/\s/.test(p)) return phrasalVariants(p)
   return verbMorphVariants(guessBase(p))
@@ -655,7 +661,9 @@ function detectType(answer) {
   if (/^(well|good|bad|loud|quick|careful)$/i.test(a)) return 'adj_adv'
   if (/^(too|enough|so|very)$/i.test(a)) return 'too_enough'
   if (/^(so that|because|in order to)$/i.test(a)) return 'purpose'
-  if (/^(to|for)$/i.test(a)) return 'purpose'
+  if (/^to$/i.test(a)) return 'purpose'
+  if (/^(already|yet|just|ever|never)$/i.test(a)) return 'pp_adverb'
+  if (/^(for|since)$/i.test(a)) return 'preposition'
   if (/^(is|are|was|were|am|be)$/i.test(a)) return 'be'
   return 'verb'
 }
@@ -730,6 +738,9 @@ export function generateDistractors(answer, _category, count = 8) {
     case 'too_enough':
       pool = ['too', 'enough', 'so', 'very', 'also', 'much', 'many']
       break
+    case 'pp_adverb':
+      pool = ppAdverbVariants(correct)
+      break
     case 'purpose':
       pool = ['to', 'for', 'so that', 'because', 'in order to', 'and']
       break
@@ -745,7 +756,7 @@ export function generateDistractors(answer, _category, count = 8) {
   const noVerbFallback = new Set([
     'article', 'preposition', 'modal', 'relative', 'quantifier', 'reflexive',
     'purpose', 'too_enough', 'there', 'be', 'comparative', 'just_adverb', 'future_negative',
-    'adverb', 'adj_adv',
+    'adverb', 'adj_adv', 'pp_adverb',
   ])
 
   if (pool.length < count && !noVerbFallback.has(type)) {
@@ -795,7 +806,7 @@ export function buildOptions(correct, category) {
     const noVerbFallback = new Set([
       'article', 'preposition', 'modal', 'relative', 'quantifier', 'reflexive',
       'purpose', 'too_enough', 'there', 'be', 'comparative', 'just_adverb', 'future_negative',
-      'adverb', 'adj_adv',
+      'adverb', 'adj_adv', 'pp_adverb',
     ])
     if (!noVerbFallback.has(type)) {
       const morph = /\s/.test(correct) ? phrasalVariants(correct) : verbMorphVariants(guessBase(correct))

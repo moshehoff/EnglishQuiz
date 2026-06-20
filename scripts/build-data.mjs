@@ -4,6 +4,13 @@ import { fileURLToPath } from 'url'
 import { labelToCategory } from './lib/categories.mjs'
 import { buildOptions } from './lib/distractors.mjs'
 import { HEBREW_EXPLANATIONS } from './lib/hebrew-explanations.mjs'
+import {
+  conditionalAnswer,
+  conditionalCategory,
+  forSinceAnswer,
+  presentPerfectVerbAnswer,
+  wordChoiceAnswer,
+} from './lib/hint-answers.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
@@ -30,9 +37,14 @@ function stripHints(text) {
 /** Convert underscore runs to single blank token */
 function toPrompt(raw) {
   let t = stripHints(raw)
+  t = t.replace(/`_{3,}`/g, BLANK)
   t = t.replace(/_{3,}/g, BLANK)
   t = t.replace(/\s+/g, ' ').trim()
   return t
+}
+
+function hasBlank(body) {
+  return /_{3,}/.test(body) || /`_{3,}`/.test(body)
 }
 
 function parseQuestions(md) {
@@ -42,10 +54,121 @@ function parseQuestions(md) {
     const m = line.match(/^\d+\.\s*(.+)$/)
     if (!m) continue
     const body = m[1].trim()
-    if (!/_{3,}/.test(body)) continue
+    if (!hasBlank(body)) continue
     items.push(toPrompt(body))
   }
   return items
+}
+
+/** Parse Worksheet_X_Answers.md — answer + category per question number */
+function parseEnglishWorksheetAnswers(md) {
+  const byNum = new Map()
+  const blocks = md.split(/\n(?=\d+\.\s+\*\*)/)
+  for (const block of blocks) {
+    const m = block.match(/^(\d+)\.\s+\*\*([^*]+)\*\*\s*[–-]\s*(.+?)(?:\n|$)/)
+    if (!m) continue
+    const num = parseInt(m[1], 10)
+    const answer = normalizeApostrophe(m[2].trim())
+    const shortTitle = m[3].trim()
+    const exampleMatch = block.match(/📘\s*\*דוגמה:\*\s*(.+)/)
+    const example = exampleMatch ? exampleMatch[1].trim() : ''
+    const explMatch = block.match(/💡\s*\*הסבר נוסף:\*\s*(.+?)(?:\n\n|\n\d+\.|$)/s)
+    const explanation = explMatch ? explMatch[1].replace(/\s+/g, ' ').trim() : shortTitle
+
+    byNum.set(num, {
+      answer,
+      label: shortTitle,
+      category: labelToCategory(explanation + ' ' + shortTitle),
+      example,
+      explanation,
+      title: shortTitle.split(/[.:]/)[0].slice(0, 80),
+    })
+  }
+  return [...byNum.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([, v]) => v)
+}
+
+function ppCategory(body, n, answer) {
+  if (n >= 21 && n <= 30) return answer === 'since' ? 'since' : 'for_duration'
+  if (n >= 31 && n <= 40) {
+    if (answer === 'yet') return 'present_perfect_negative'
+    if (answer === 'never') return 'present_perfect_never'
+    if (answer === 'just') return 'present_perfect_just'
+    if (answer === 'already') return 'present_perfect_already'
+    if (answer === 'ever') return 'present_perfect_question'
+    return 'present_perfect'
+  }
+  if (/never/.test(answer)) return 'present_perfect_never'
+  if (/already/.test(answer)) return 'present_perfect_already'
+  if (/just/.test(answer)) return 'present_perfect_just'
+  if (/not/.test(answer) && /yet/i.test(body)) return 'present_perfect_negative'
+  return 'present_perfect'
+}
+
+function parseMore2PresentPerfect(md) {
+  const items = []
+  for (const line of md.split('\n')) {
+    const m = line.match(/^(\d+)\.\s*(.+)$/)
+    if (!m) continue
+    const n = parseInt(m[1], 10)
+    if (n >= 41) continue
+    const body = m[2].trim()
+    if (!hasBlank(body)) continue
+
+    const prompt = toPrompt(body)
+    let answer
+
+    if (n >= 31 && n <= 40) {
+      answer = wordChoiceAnswer(body)
+    } else if (n >= 21 && n <= 30) {
+      answer = forSinceAnswer(body)
+    } else {
+      answer = presentPerfectVerbAnswer(body)
+    }
+
+    if (!answer) continue
+    const category = ppCategory(body, n, answer)
+    items.push({
+      prompt,
+      answer: normalizeApostrophe(answer),
+      category,
+      label: 'Present Perfect',
+      example: '',
+    })
+  }
+  return items
+}
+
+function parseConditional(md) {
+  const items = []
+  for (const line of md.split('\n')) {
+    const trimmed = line.trim()
+    if (!/^If\s/i.test(trimmed)) continue
+    if (!hasBlank(trimmed)) continue
+
+    const prompt = toPrompt(trimmed)
+    const answer = conditionalAnswer(trimmed)
+    if (!answer) continue
+    const category = conditionalCategory(answer, trimmed)
+    items.push({
+      prompt,
+      answer: normalizeApostrophe(answer),
+      category,
+      label: category,
+      example: '',
+    })
+  }
+  return items
+}
+
+function pushQuestions(questions, keyItems, entries) {
+  for (const entry of entries) {
+    const { prompt, answer, category } = entry
+    const { options, correctIndex } = buildOptions(answer, category)
+    questions.push({ category, prompt, options, correctIndex })
+    keyItems.push(entry)
+  }
 }
 
 function extractAnswerFromLine(line) {
@@ -170,6 +293,7 @@ function mergeExplanations(fromKeys, fromEnglish) {
     past_continuous_mixed: 'Past Continuous + Past Simple',
     past_continuous: 'Past Continuous',
     second_conditional: 'Second Conditional',
+    third_conditional: 'Third Conditional',
     first_conditional: 'First Conditional',
     first_conditional_negative: 'First Conditional — שלילה',
     past_passive: 'Passive Voice — Past Simple',
@@ -251,29 +375,53 @@ function loadAllData() {
     const answers = parseAnswerKey(readFile(aPath))
 
     if (prompts.length !== answers.length) {
-      console.warn(`Worksheet ${w}: ${prompts.length} questions vs ${answers.length} answers`)
+      console.warn(`more/Worksheet ${w}: ${prompts.length} questions vs ${answers.length} answers`)
     }
 
     const n = Math.min(prompts.length, answers.length)
+    const entries = []
     for (let i = 0; i < n; i++) {
-      const { answer, category } = answers[i]
-      const { options, correctIndex } = buildOptions(answer, category)
-      questions.push({
-        category,
-        prompt: prompts[i],
-        options,
-        correctIndex,
-      })
-      keyItems.push(answers[i])
+      entries.push({ prompt: prompts[i], ...answers[i] })
     }
+    pushQuestions(questions, keyItems, entries)
   }
 
   const englishItems = []
   for (let w = 1; w <= 4; w++) {
-    const p = path.join(ENGLISH, `Worksheet_${w}_Answers.md`)
-    if (fs.existsSync(p)) {
-      englishItems.push(...parseEnglishAnswers(readFile(p)))
+    const qPath = path.join(ENGLISH, `Worksheet_${w}_Questions.md`)
+    const aPath = path.join(ENGLISH, `Worksheet_${w}_Answers.md`)
+    if (!fs.existsSync(qPath) || !fs.existsSync(aPath)) continue
+
+    const prompts = parseQuestions(readFile(qPath))
+    const answers = parseEnglishWorksheetAnswers(readFile(aPath))
+
+    if (prompts.length !== answers.length) {
+      console.warn(`english/Worksheet ${w}: ${prompts.length} questions vs ${answers.length} answers`)
     }
+
+    const n = Math.min(prompts.length, answers.length)
+    const entries = []
+    for (let i = 0; i < n; i++) {
+      const a = answers[i]
+      entries.push({ prompt: prompts[i], ...a })
+      englishItems.push({
+        category: a.category,
+        title: a.title,
+        explanation: a.explanation,
+        examples: a.example ? [a.example] : [],
+      })
+    }
+    pushQuestions(questions, keyItems, entries)
+  }
+
+  const ppPath = path.join(ENGLISH, 'more2', 'present_perfect.md')
+  if (fs.existsSync(ppPath)) {
+    pushQuestions(questions, keyItems, parseMore2PresentPerfect(readFile(ppPath)))
+  }
+
+  const condPath = path.join(ENGLISH, 'more2', 'conditional.md')
+  if (fs.existsSync(condPath)) {
+    pushQuestions(questions, keyItems, parseConditional(readFile(condPath)))
   }
 
   const explanations = mergeExplanations(keyItems, englishItems)

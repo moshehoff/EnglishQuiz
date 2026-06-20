@@ -483,5 +483,12 @@
       "She has visited Jerusalem twice.",
       "Have you ever seen a lion?"
     ]
+  },
+  "third_conditional": {
+    "title": "Third Conditional",
+    "explanation": "Third Conditional לתנאים שלא התקיימו בעבר. If + had + past participle → would have + past participle. \"If she had studied harder, she would have passed\" — אם הייתה לומדת יותר, הייתה עוברת. משמש להצטערות או ניתוח עבר.",
+    "examples": [
+      "If I had studied harder, I would have passed the exam."
+    ]
   }
 }
