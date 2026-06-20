@@ -7,8 +7,8 @@ import { HEBREW_EXPLANATIONS } from './lib/hebrew-explanations.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
-const MORE = path.join('C:', 'projects', 'english', 'more')
-const ENGLISH = path.join('C:', 'projects', 'english')
+const MORE = path.join(ROOT, 'data', 'more')
+const ENGLISH = path.join(ROOT, 'data')
 const OUT_Q = path.join(ROOT, 'public', 'questions.json')
 const OUT_E = path.join(ROOT, 'public', 'explanations.json')
 
