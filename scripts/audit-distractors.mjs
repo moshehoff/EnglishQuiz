@@ -61,14 +61,23 @@ const checks = [
   ['just arrived', /just|arriv/i],
   ["hasn't finished", (w) => /finish/i.test(w) && !/(hasn't|haven't|hadn't) \w+ing\b/i.test(w)],
   ["hasn't seen", (w) => /see|saw|seen/i.test(w) && !/(hasn't|haven't|hadn't) \w+ing\b/i.test(w)],
+  ['have / known', (w) => {
+    const [a, b] = w.split(/\s*\/\s*/).map((p) => p.trim())
+    return norm(a) !== 'have' || norm(b) !== 'known'
+  }],
 ]
 console.log('\nSpot checks:')
 for (const [answer, pattern] of checks) {
   const q = questions.find((x) => norm(x.options[x.correctIndex]) === norm(answer))
   if (!q) { console.log(`  MISSING: ${answer}`); continue }
   const wrong = q.options.filter((_, j) => j !== q.correctIndex)
-  const ok = typeof pattern === 'function'
-    ? wrong.every(pattern)
-    : wrong.every((w) => pattern.test(w))
+  let ok
+  if (answer === 'have / known') {
+    const hasPart1 = wrong.some((w) => norm(w.split(/\s*\/\s*/)[0]?.trim()) !== 'have')
+    const hasPart2 = wrong.some((w) => norm(w.split(/\s*\/\s*/)[1]?.trim()) !== 'known')
+    ok = hasPart1 && hasPart2 && wrong.every((w) => pattern(w))
+  } else {
+    ok = typeof pattern === 'function' ? wrong.every(pattern) : wrong.every((w) => pattern.test(w))
+  }
   console.log(`  ${ok ? 'OK' : 'CHECK'} "${q.prompt.slice(0, 50)}..." → ${wrong.join(', ')}`)
 }

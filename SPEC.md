@@ -68,6 +68,15 @@
 
 **אסור:** צירופים לא תקינים כמו `hasn't finishing`, `hasn't finish`, `hasn'ted finished`.
 
+### תשובות כפולות (`have / known`)
+
+שאלות עם שני חסרים — כל חלק מקבל היסחים משלו:
+- חלק 1 (עזר): `have` → `has`, `had`, `do`, `does`…
+- חלק 2 (פועל): `known` → `know`, `knew`, `knows`, `knowing`…
+- חובה שיהיו היסחים שמשנים **כל חלק בנפרד** וגם **שני החלקים יחד**
+
+**אסור:** כל ההיסחים עם אותו חלק 1 (למשל רק `have / …`) או צירופים לא תקינים (`have / is knowing`).
+
 ### מימוש טכני
 
 - `parseHaveAnswer()` — מזהה גם קיצורים: `hasn't`, `haven't`, `hadn't`, `have not`

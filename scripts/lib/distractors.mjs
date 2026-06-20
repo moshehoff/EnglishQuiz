@@ -202,6 +202,12 @@ function validTensePhrases(base, particle = '') {
   return uniq(phrases)
 }
 
+/** Single-word verb forms only — for dual-answer blanks (e.g. know / known / knew) */
+function validVerbForms(base) {
+  const b = base.toLowerCase()
+  return uniq([b, thirdPerson(b), ingForm(b), pastForm(b), ppForm(b)])
+}
+
 /** All morphological + Israeli-mistake variants for a verb base */
 function verbMorphVariants(base, particle = '') {
   const b = base.toLowerCase()
@@ -586,16 +592,13 @@ function dualAnswerVariants(answer) {
   const parts = answer.split(/\s*\/\s*/).map((p) => p.trim())
   if (parts.length !== 2) return []
 
-  const pool1 = partDistractors(parts[0])
-  const pool2 = partDistractors(parts[1])
+  const pool1 = partDistractors(parts[0]).filter((a) => norm(a) !== norm(parts[0]))
+  const pool2 = partDistractors(parts[1]).filter((b) => norm(b) !== norm(parts[1]))
   const out = []
 
-  for (const b of pool2) {
-    if (norm(b) !== norm(parts[1])) out.push(`${parts[0]} / ${b}`)
-  }
-  for (const a of pool1) {
-    if (norm(a) !== norm(parts[0])) out.push(`${a} / ${parts[1]}`)
-  }
+  // Vary part 1 first (e.g. have → has) — was being drowned out by part-2-only variants
+  for (const a of pool1) out.push(`${a} / ${parts[1]}`)
+  for (const b of pool2) out.push(`${parts[0]} / ${b}`)
   for (const a of pool1.slice(0, 4)) {
     for (const b of pool2.slice(0, 4)) {
       if (norm(a) === norm(parts[0]) && norm(b) === norm(parts[1])) continue
@@ -605,12 +608,51 @@ function dualAnswerVariants(answer) {
   return uniq(out)
 }
 
+function pickDualDistractors(pool, correct, count = 5) {
+  const parts = correct.split(/\s*\/\s*/).map((p) => p.trim())
+  const split = (d) => d.split(/\s*\/\s*/).map((p) => p.trim())
+
+  const part1Only = pool.filter(
+    (d) => norm(split(d)[0]) !== norm(parts[0]) && norm(split(d)[1]) === norm(parts[1]),
+  )
+  const part2Only = pool.filter(
+    (d) => norm(split(d)[0]) === norm(parts[0]) && norm(split(d)[1]) !== norm(parts[1]),
+  )
+  const both = pool.filter((d) => {
+    const [a, b] = split(d)
+    return norm(a) !== norm(parts[0]) && norm(b) !== norm(parts[1])
+  })
+
+  const out = []
+  const quotas = [
+    { list: part1Only, max: 2 },
+    { list: part2Only, max: 2 },
+    { list: both, max: 1 },
+  ]
+
+  for (const { list, max } of quotas) {
+    let added = 0
+    for (const x of list) {
+      if (out.length >= count || added >= max) break
+      if (!out.some((o) => norm(o) === norm(x))) {
+        out.push(x)
+        added++
+      }
+    }
+  }
+  for (const x of pool) {
+    if (out.length >= count) break
+    if (!out.some((o) => norm(o) === norm(x))) out.push(x)
+  }
+  return out.slice(0, count)
+}
+
 function partDistractors(part) {
   const p = part.trim()
   if (PREPOSITIONS.includes(norm(p))) return PREPOSITIONS
   if (AUX_DO.includes(norm(p))) return AUX_DO
-  if (/^(do|does|did|is|are|was|were|have|has)$/i.test(p)) {
-    return ['do', 'does', 'did', 'is', 'are', 'was', 'were', 'have', 'has']
+  if (/^(do|does|did|is|are|was|were|have|has|had)$/i.test(p)) {
+    return ['have', 'has', 'had', 'do', 'does', 'did', 'is', 'are', 'was', 'were']
   }
   if (/^(was|were|is|are|am)\s+\S+/i.test(p)) return pastContinuousVariants(p)
   if (/^(have|has|had)\s/i.test(p)) return presentPerfectVariants(p)
@@ -619,7 +661,7 @@ function partDistractors(part) {
   if (/^would not have\s/i.test(p)) return conditionalVariants(p)
   if (/^(don't|doesn't|didn't)\s/i.test(p)) return presentSimpleNegativeVariants(p)
   if (/\s/.test(p)) return phrasalVariants(p)
-  return verbMorphVariants(guessBase(p))
+  return validVerbForms(guessBase(p))
 }
 
 function adverbVariants(answer) {
@@ -795,10 +837,12 @@ export function generateDistractors(answer, _category, count = 8) {
 }
 
 export function buildOptions(correct, category) {
-  const distractors = uniq(generateDistractors(correct, category, 12).filter((x) => norm(x) !== norm(correct))).slice(
-    0,
-    5,
+  const type = detectType(correct)
+  const fullPool = uniq(
+    generateDistractors(correct, category, 30).filter((x) => norm(x) !== norm(correct)),
   )
+  const distractors =
+    type === 'dual' ? pickDualDistractors(fullPool, correct, 5) : fullPool.slice(0, 5)
 
   let options = uniq([correct, ...distractors])
 
