@@ -107,6 +107,8 @@ function guessBase(word) {
     const stem = w.slice(0, -3)
     if (IRREGULAR[stem]) return stem
     if (IRREGULAR[stem + 'e']) return stem + 'e'
+    // silent-e: dancing → dance, smoking → smoke
+    if (stem.length >= 2) return stem + 'e'
     return stem
   }
   if (w.endsWith('ied')) return w.slice(0, -3) + 'y'
@@ -119,6 +121,16 @@ function guessBase(word) {
   if (w.endsWith('es')) return w.slice(0, -2)
   if (w.endsWith('s') && !w.endsWith('ss')) return w.slice(0, -1)
   return w
+}
+
+/** Base form from gerund (dancing → dance) */
+function baseFromGerund(answer) {
+  const w = answer.trim().toLowerCase()
+  for (const [base, forms] of Object.entries(IRREGULAR)) {
+    if (norm(forms.ing) === norm(w)) return base
+  }
+  if (w.endsWith('ing')) return guessBase(w)
+  return guessBase(w)
 }
 
 /** All morphological + Israeli-mistake variants for a verb base */
@@ -364,8 +376,34 @@ function pastContinuousVariants(part) {
   ])
 }
 
+function futureNegativeVariants(answer) {
+  const a = answer.trim()
+  const m = a.match(/^(am|is|are)\s+not\s+going$/i)
+  if (!m) return []
+
+  const subj = m[1].toLowerCase()
+  const others = { am: ['is', 'are'], is: ['am', 'are'], are: ['am', 'is'] }[subj] ?? ['is', 'are']
+
+  return uniq([
+    ...others.map((s) => `${s} not going`),
+    `${subj} going`,
+    ...others.map((s) => `${s} going`),
+    'will not go',
+    "won't go",
+    "don't go",
+    "doesn't go",
+    'not going',
+    'was not going',
+    'were not going',
+    `${subj} not go`,
+    `${subj} not goes`,
+  ])
+}
+
 function futureVariants(answer) {
   const a = answer.trim()
+  if (/^(am|is|are)\s+not\s+going$/i.test(a)) return futureNegativeVariants(a)
+
   if (/^will\s/i.test(a)) {
     const verb = a.replace(/^will\s/i, '')
     const base = guessBase(verb.split(/\s/)[0])
@@ -444,33 +482,57 @@ function conditionalVariants(answer) {
 
 function comparativeVariants(answer) {
   const a = answer.trim()
-  const parts = [a]
+  const parts = []
 
-  const rules = [
-    [/more (\w+)/, ['$1', 'most $1', 'more $1er', 'most $1er']],
-    [/most (\w+)/, ['$1', 'more $1', '$1er', 'more $1er']],
-    [/(\w+)est\b/, ['$1', '${1}er', 'more $1', 'most $1']],
-    [/(\w+)er\b/, ['$1', '${1}est', 'more $1', 'most $1']],
-    [/best/, ['good', 'better', 'worst', 'the best']],
-    [/worst/, ['bad', 'worse', 'best', 'the worst']],
-    [/better/, ['good', 'best', 'more good', 'gooder']],
-    [/worse/, ['bad', 'worst', 'more bad', 'badder']],
-  ]
-
-  for (const [re, replacements] of rules) {
-    const m = a.match(re)
-    if (m) {
-      for (const r of replacements) {
-        parts.push(a.replace(re, r))
-      }
-    }
+  if (/^best$/i.test(a)) {
+    parts.push('good', 'better', 'worst', 'the best', 'more good', 'goodest')
+  } else if (/^worst$/i.test(a)) {
+    parts.push('bad', 'worse', 'best', 'the worst', 'more bad', 'baddest')
+  } else if (/^better$/i.test(a)) {
+    parts.push('good', 'best', 'more good', 'gooder', 'well')
+  } else if (/^worse$/i.test(a)) {
+    parts.push('bad', 'worst', 'more bad', 'badder')
+  } else if (/^tallest$/i.test(a)) {
+    parts.push('tall', 'taller', 'most tall', 'more tall', 'the tallest', 'tallests')
+  } else if (/^more expensive$/i.test(a)) {
+    parts.push('expensive', 'most expensive', 'expensiver', 'more expensiver', 'expensivest')
+  } else if (/^more difficult$/i.test(a)) {
+    parts.push('difficult', 'most difficult', 'difficulter', 'more difficulter', 'difficultest')
+  } else if (/^more (\w+)$/i.test(a)) {
+    const word = a.match(/^more (\w+)$/i)[1]
+    parts.push(word, `most ${word}`, `${word}er`, `more ${word}er`)
+  } else if (/(\w+)est$/i.test(a)) {
+    const stem = a.match(/(\w+)est$/i)[1]
+    parts.push(stem, `${stem}er`, `more ${stem}`, `most ${stem}`)
   }
 
-  // Israeli: missing "more" / wrong superlative
   if (/^more /i.test(a)) parts.push(a.replace(/^more /, ''), a.replace(/^more /, 'most '))
   if (/^the /i.test(a)) parts.push(a.replace(/^the /, ''))
 
-  return uniq(parts)
+  return uniq(parts.filter((x) => norm(x) !== norm(a)))
+}
+
+function justVariants(answer) {
+  const a = answer.trim()
+  const verb = a.replace(/^just\s+/i, '')
+  const base = guessBase(verb)
+  return uniq([
+    a.replace(/^just /, 'already '),
+    a.replace(/^just /, 'yet '),
+    `already ${verb}`,
+    `have just ${verb}`,
+    `has just ${verb}`,
+    `just ${base}`,
+    `just ${ingForm(base)}`,
+    `just ${pastForm(base)}`,
+    verb,
+    `${pastForm(base)}`,
+  ])
+}
+
+function articleVariants(answer) {
+  const pool = ['a', 'an', 'the', 'some', 'any', '—', 'this', 'that']
+  return pool.filter((p) => norm(p) !== norm(answer))
 }
 
 function gerundInfinitiveVariants(answer) {
@@ -495,7 +557,7 @@ function gerundInfinitiveVariants(answer) {
     ])
   }
 
-  const base = guessBase(a.replace(/ing$/, ''))
+  const base = baseFromGerund(a)
   return uniq([
     base,
     `to ${base}`,
@@ -505,8 +567,6 @@ function gerundInfinitiveVariants(answer) {
     `will ${base}`,
     // Israeli: infinitive where gerund needed
     `to ${ingForm(base)}`,
-    // Israeli: -ing where base needed
-    ingForm(base),
   ])
 }
 
@@ -549,27 +609,22 @@ function partDistractors(part) {
 
 function adverbVariants(answer) {
   const a = answer.trim()
-  const base = a.replace(/ly$/, '')
-  return uniq([
-    base,
-    `${base}ly`,
-    'good',
-    'well',
-    'bad',
-    'badly',
-    'quick',
-    'quickly',
-    'careful',
-    'carefully',
-    'loud',
-    'loudly',
-    'angry',
-    'angrily',
-    'happy',
-    'happily',
-    // Israeli: adjective instead of adverb
-    ...(a.endsWith('ly') ? [base] : [`${a}ly`]),
-  ])
+  const pool = [
+    'good', 'well', 'bad', 'badly', 'quick', 'quickly',
+    'careful', 'carefully', 'loud', 'loudly', 'angry', 'angrily', 'happy', 'happily',
+  ]
+  const lyFromAdj = { good: 'well', bad: 'badly', quick: 'quickly', careful: 'carefully', loud: 'loudly', angry: 'angrily', happy: 'happily' }
+
+  if (a.endsWith('ly')) {
+    const base = a.replace(/ly$/, '')
+    if (base.length >= 2) pool.push(base) // Israeli: adjective instead of adverb
+  } else if (lyFromAdj[a]) {
+    // already covered in pool
+  } else if (a.length >= 3 && a !== 'well') {
+    pool.push(`${a}ly`)
+  }
+
+  return uniq(pool.filter((p) => norm(p) !== norm(a)))
 }
 
 function detectType(answer) {
@@ -577,15 +632,17 @@ function detectType(answer) {
   const n = norm(a)
 
   if (/\s*\/\s*/.test(a)) return 'dual'
+  if (/^(am|is|are)\s+not\s+going$/i.test(a)) return 'future_negative'
   if (/^(there is|there are|is there|are there|was there|were there)/i.test(a)) return 'there'
   if (/^(don't|doesn't|didn't)\s/.test(a)) return 'present_simple_negative'
+  if (/^just\s/i.test(a)) return 'just_adverb'
   if (/^(was|were|is|are|am)\s+\S+ing$/i.test(a)) return 'past_continuous'
   if (/^(was|were|is|are|am)\s+\S+/i.test(a) && /going|writing|visiting/i.test(a)) return 'future'
   if (/^(have|has|had)\s/i.test(a)) return 'present_perfect'
   if (/^(was|were|is|are)\s+\S+$/i.test(a) && /made|built|sent|served|spoken/i.test(a)) return 'passive'
-  if (/^will\s|^would\s|^won$|^am going|^is going|^are going|^am not|^am writing/i.test(a)) return 'conditional'
+  if (/^will\s|^would\s|^won$|^am going|^is going|^are going|^am writing/i.test(a)) return 'conditional'
   if (/^would not|^don't hurry/i.test(a)) return 'conditional'
-  if (/^(more |most |better|best|worst|worse|-er|-est)/i.test(a) || /tallest|expensive|difficult/i.test(a)) return 'comparative'
+  if (/^(more |most |better|best|worst|worse)/i.test(a) || /tallest|expensive|difficult/i.test(a)) return 'comparative'
   if (/^to\s/i.test(a)) return 'infinitive'
   if (/ing$/i.test(a) && !/^(is|are|was|were|am)\s/.test(a)) return 'gerund'
   if (/^(myself|yourself|himself|herself|itself|ourselves|themselves)$/i.test(a)) return 'reflexive'
@@ -627,11 +684,17 @@ export function generateDistractors(answer, _category, count = 8) {
     case 'future':
       pool = futureVariants(correct)
       break
+    case 'future_negative':
+      pool = futureNegativeVariants(correct)
+      break
     case 'conditional':
       pool = conditionalVariants(correct)
       break
     case 'comparative':
       pool = comparativeVariants(correct)
+      break
+    case 'just_adverb':
+      pool = justVariants(correct)
       break
     case 'gerund':
     case 'infinitive':
@@ -644,7 +707,7 @@ export function generateDistractors(answer, _category, count = 8) {
       pool = PREPOSITIONS.filter((p) => norm(p) !== norm(correct))
       break
     case 'article':
-      pool = ARTICLES.filter((p) => norm(p) !== norm(correct))
+      pool = articleVariants(correct)
       break
     case 'modal':
       pool = MODALS.filter((p) => norm(p) !== norm(correct))
@@ -679,14 +742,20 @@ export function generateDistractors(answer, _category, count = 8) {
 
   pool = uniq(pool.filter((x) => norm(x) !== norm(correct) && x.length > 0))
 
-  if (pool.length < count) {
+  const noVerbFallback = new Set([
+    'article', 'preposition', 'modal', 'relative', 'quantifier', 'reflexive',
+    'purpose', 'too_enough', 'there', 'be', 'comparative', 'just_adverb', 'future_negative',
+    'adverb', 'adj_adv',
+  ])
+
+  if (pool.length < count && !noVerbFallback.has(type)) {
     const extra = /\s/.test(correct)
       ? phrasalVariants(correct)
       : verbMorphVariants(guessBase(correct))
     pool = uniq([...pool, ...extra.filter((x) => norm(x) !== norm(correct))])
   }
 
-  if (pool.length < count && /\s/.test(correct)) {
+  if (pool.length < count && !noVerbFallback.has(type) && /\s/.test(correct)) {
     const swaps = [
       correct.replace(/^have /i, 'has '),
       correct.replace(/^has /i, 'have '),
@@ -722,10 +791,25 @@ export function buildOptions(correct, category) {
 
   if (options.length < 6) {
     console.warn(`Only ${options.length} options for "${correct}" (${category})`)
-    const morph = /\s/.test(correct) ? phrasalVariants(correct) : verbMorphVariants(guessBase(correct))
-    for (const m of morph) {
-      if (options.length >= 6) break
-      if (norm(m) !== norm(correct) && !options.some((o) => norm(o) === norm(m))) options.push(m)
+    const type = detectType(correct)
+    const noVerbFallback = new Set([
+      'article', 'preposition', 'modal', 'relative', 'quantifier', 'reflexive',
+      'purpose', 'too_enough', 'there', 'be', 'comparative', 'just_adverb', 'future_negative',
+      'adverb', 'adj_adv',
+    ])
+    if (!noVerbFallback.has(type)) {
+      const morph = /\s/.test(correct) ? phrasalVariants(correct) : verbMorphVariants(guessBase(correct))
+      for (const m of morph) {
+        if (options.length >= 6) break
+        if (norm(m) !== norm(correct) && !options.some((o) => norm(o) === norm(m))) options.push(m)
+      }
+    }
+    if (!noVerbFallback.has(type)) {
+      const extra = generateDistractors(correct, category, 20).filter((x) => norm(x) !== norm(correct))
+      for (const e of extra) {
+        if (options.length >= 6) break
+        if (!options.some((o) => norm(o) === norm(e))) options.push(e)
+      }
     }
   }
 
