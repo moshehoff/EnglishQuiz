@@ -3,38 +3,38 @@
     "category": "present_perfect_never",
     "prompt": "I __________ to London.",
     "options": [
-      "have ever been",
-      "had never been",
-      "never been",
+      "have never been",
       "was never",
+      "never been",
       "has never been",
-      "have never been"
+      "had never been",
+      "have ever been"
     ],
-    "correctIndex": 5
+    "correctIndex": 0
   },
   {
     "category": "past_continuous_dual",
     "prompt": "While I __________, my brother __________ a lot of noise.",
     "options": [
+      "was studying / are making",
+      "was studying / was making",
       "was studying / is making",
       "was studying / was maked",
-      "was studying / was making",
-      "was studying / was mak",
       "was studying / were making",
-      "was studying / are making"
+      "was studying / was mak"
     ],
-    "correctIndex": 2
+    "correctIndex": 1
   },
   {
     "category": "second_conditional",
     "prompt": "If I __________ the lottery, I would buy a big house.",
     "options": [
       "had won",
-      "will win",
+      "win",
       "won",
-      "would win",
       "wins",
-      "win"
+      "would win",
+      "will win"
     ],
     "correctIndex": 2
   },
@@ -42,53 +42,53 @@
     "category": "past_passive",
     "prompt": "This cake __________ by my grandmother yesterday.",
     "options": [
-      "was sent",
-      "is built",
-      "was make",
       "is made",
       "were made",
-      "was made"
+      "was made",
+      "was sent",
+      "is built",
+      "was make"
     ],
-    "correctIndex": 5
+    "correctIndex": 2
   },
   {
     "category": "modal_should",
     "prompt": "You __________ drink more water every day.",
     "options": [
-      "can",
-      "should",
-      "don't have to",
-      "must",
       "might",
-      "have to"
+      "have to",
+      "can",
+      "must",
+      "don't have to",
+      "should"
     ],
-    "correctIndex": 1
+    "correctIndex": 5
   },
   {
     "category": "relative_who",
     "prompt": "The boy __________ is wearing a red shirt is my cousin.",
     "options": [
-      "which",
       "where",
-      "that",
+      "which",
       "whose",
       "who",
-      "when"
+      "when",
+      "that"
     ],
-    "correctIndex": 4
+    "correctIndex": 3
   },
   {
     "category": "future_will",
     "prompt": "I think it __________ tomorrow.",
     "options": [
       "must",
-      "might",
-      "should",
+      "can",
       "will snow",
       "could",
-      "can"
+      "should",
+      "might"
     ],
-    "correctIndex": 3
+    "correctIndex": 2
   },
   {
     "category": "superlative",
@@ -97,61 +97,61 @@
       "worse",
       "better",
       "worst",
-      "best",
       "bad",
+      "best",
       "good"
     ],
-    "correctIndex": 3
+    "correctIndex": 4
   },
   {
     "category": "gerund_good_at",
     "prompt": "She is very good at __________.",
     "options": [
-      "dancing",
-      "to danc",
+      "danced",
       "will danc",
       "danc",
-      "danced",
+      "to danc",
+      "dancing",
       "dancs"
     ],
-    "correctIndex": 0
+    "correctIndex": 4
   },
   {
     "category": "prepositions_dual",
     "prompt": "We met __________ the cinema __________ 8 o'clock.",
     "options": [
-      "at / in",
-      "at / by",
-      "at / on",
-      "at / for",
       "at / at",
-      "at / to"
+      "at / by",
+      "at / to",
+      "at / for",
+      "at / in",
+      "at / on"
     ],
-    "correctIndex": 4
+    "correctIndex": 0
   },
   {
     "category": "article_an",
     "prompt": "There is __________ apple on the table.",
     "options": [
-      "an",
-      "a",
-      "no",
       "any",
       "some",
-      "the"
+      "no",
+      "a",
+      "the",
+      "an"
     ],
-    "correctIndex": 0
+    "correctIndex": 5
   },
   {
     "category": "quantifier_few",
     "prompt": "I have __________ friends in my new school.",
     "options": [
       "a little",
-      "much",
       "many",
-      "few",
       "little",
-      "a few"
+      "few",
+      "a few",
+      "much"
     ],
     "correctIndex": 3
   },
@@ -159,38 +159,38 @@
     "category": "adverb",
     "prompt": "She speaks English very __________.",
     "options": [
-      "slow",
       "good",
       "quick",
-      "well",
+      "slow",
+      "bad",
       "nice",
-      "bad"
+      "well"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "present_continuous",
     "prompt": "Look! The dog __________ after the cat right now.",
     "options": [
-      "runs",
-      "was running",
-      "running",
       "run",
       "are running",
-      "is running"
+      "running",
+      "runs",
+      "is running",
+      "was running"
     ],
-    "correctIndex": 5
+    "correctIndex": 4
   },
   {
     "category": "infinitive_purpose",
     "prompt": "I went to the shop __________ buy some milk.",
     "options": [
-      "because",
+      "for",
       "to",
       "so that",
-      "and",
-      "for",
-      "in order to"
+      "in order to",
+      "because",
+      "and"
     ],
     "correctIndex": 1
   },
@@ -198,12 +198,12 @@
     "category": "there_were",
     "prompt": "There __________ a lot of people at the concert last night.",
     "options": [
-      "are",
+      "have been",
       "were",
-      "was",
       "had been",
+      "was",
       "is",
-      "have been"
+      "are"
     ],
     "correctIndex": 1
   },
@@ -211,272 +211,272 @@
     "category": "present_simple_habit",
     "prompt": "My sister __________ early every morning.",
     "options": [
-      "eats",
       "don't eat",
       "eat",
-      "eating",
       "ate",
-      "wakes up"
+      "eats",
+      "wakes up",
+      "eating"
     ],
-    "correctIndex": 5
+    "correctIndex": 4
   },
   {
     "category": "too_enough",
     "prompt": "This bag is __________ heavy. I can't carry it.",
     "options": [
-      "much",
       "so",
-      "too",
       "also",
-      "enough",
-      "very"
+      "much",
+      "too",
+      "very",
+      "enough"
     ],
-    "correctIndex": 2
+    "correctIndex": 3
   },
   {
     "category": "since",
     "prompt": "She has lived in Israel __________ 2015.",
     "options": [
-      "since",
-      "for",
-      "from",
-      "at",
       "by",
-      "in"
+      "in",
+      "at",
+      "from",
+      "since",
+      "for"
     ],
-    "correctIndex": 0
+    "correctIndex": 4
   },
   {
     "category": "present_simple_negative",
     "prompt": "He __________ coffee, but he loves tea.",
     "options": [
-      "not like",
       "doesn't like",
-      "didn't like",
+      "don't like",
       "doesn't eat",
+      "not like",
       "don't eat",
-      "don't like"
+      "didn't like"
     ],
-    "correctIndex": 1
+    "correctIndex": 0
   },
   {
     "category": "present_perfect_already",
     "prompt": "She __________ her homework.",
     "options": [
+      "has already finished",
       "already finished",
-      "has finished",
-      "have already finished",
       "had already finished",
       "has already finish",
-      "has already finished"
+      "has finished",
+      "have already finished"
     ],
-    "correctIndex": 5
+    "correctIndex": 0
   },
   {
     "category": "past_continuous",
     "prompt": "When I called her, she __________ a movie.",
     "options": [
-      "are watching",
-      "was watched",
       "was watching",
-      "was watch",
       "is watching",
-      "were watching"
+      "was watched",
+      "were watching",
+      "are watching",
+      "was watch"
     ],
-    "correctIndex": 2
+    "correctIndex": 0
   },
   {
     "category": "first_conditional",
     "prompt": "If it rains, we __________ at home.",
     "options": [
       "can",
-      "will stay",
       "should",
-      "might",
       "could",
-      "must"
+      "must",
+      "will stay",
+      "might"
     ],
-    "correctIndex": 1
+    "correctIndex": 4
   },
   {
     "category": "present_passive",
     "prompt": "English __________ in many countries.",
     "options": [
-      "was spoken",
       "is serve",
-      "is spoken",
-      "are served",
       "was served",
-      "is speaks"
+      "is speaks",
+      "are served",
+      "is spoken",
+      "was spoken"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "modal_must",
     "prompt": "He __________ finish the project by tomorrow.",
     "options": [
-      "can",
-      "must",
+      "don't have to",
       "might",
-      "have to",
       "should",
-      "don't have to"
+      "can",
+      "have to",
+      "must"
     ],
-    "correctIndex": 1
+    "correctIndex": 5
   },
   {
     "category": "relative_where",
     "prompt": "Tel Aviv is a city __________ many tourists visit.",
     "options": [
-      "which",
-      "whose",
-      "when",
-      "where",
       "that",
-      "who"
+      "where",
+      "whose",
+      "which",
+      "who",
+      "when"
     ],
-    "correctIndex": 3
+    "correctIndex": 1
   },
   {
     "category": "future_going_to",
     "prompt": "We __________ to the beach next weekend.",
     "options": [
-      "was going",
-      "goes",
-      "will go",
       "went",
       "is going",
-      "are going"
+      "goes",
+      "was going",
+      "are going",
+      "will go"
     ],
-    "correctIndex": 5
+    "correctIndex": 4
   },
   {
     "category": "comparative",
     "prompt": "My phone is __________ than yours.",
     "options": [
-      "more expensive",
-      "most expensive",
       "less expensive",
-      "expensiver",
       "expensive",
-      "more cheap"
+      "most expensive",
+      "more cheap",
+      "expensiver",
+      "more expensive"
     ],
-    "correctIndex": 0
+    "correctIndex": 5
   },
   {
     "category": "gerund_after_hate",
     "prompt": "I hate __________ in long lines.",
     "options": [
       "will wait",
-      "to wait",
+      "waits",
+      "waiting",
       "waited",
       "wait",
-      "waiting",
-      "waits"
+      "to wait"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "preposition_in_time",
     "prompt": "She was born __________ May __________ 2009.",
     "options": [
+      "in / to",
       "in / for",
       "in / on",
-      "in / in",
-      "in / at",
       "in / by",
-      "in / to"
+      "in / in",
+      "in / at"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "superlative_the",
     "prompt": "This is __________ most beautiful song I know.",
     "options": [
-      "a",
       "best",
-      "the",
-      "an",
       "most",
-      "more"
+      "a",
+      "an",
+      "more",
+      "the"
     ],
-    "correctIndex": 2
+    "correctIndex": 5
   },
   {
     "category": "quantifier_much",
     "prompt": "How __________ money do you need?",
     "options": [
-      "many",
-      "much",
-      "a lot",
       "little",
+      "some",
+      "many",
       "few",
-      "some"
+      "a lot",
+      "much"
     ],
-    "correctIndex": 1
+    "correctIndex": 5
   },
   {
     "category": "adverb",
     "prompt": "He runs very __________.",
     "options": [
-      "good",
-      "bad",
-      "nice",
+      "slow",
       "quickly",
       "quick",
-      "slow"
+      "nice",
+      "good",
+      "bad"
     ],
-    "correctIndex": 3
+    "correctIndex": 1
   },
   {
     "category": "present_simple_habit",
     "prompt": "I usually __________ breakfast at 7:30.",
     "options": [
-      "doesn't eat",
       "eats",
-      "eating",
-      "eat",
       "ate",
-      "don't eat"
+      "doesn't eat",
+      "eating",
+      "don't eat",
+      "eat"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "so_that",
     "prompt": "She saved money __________ she could buy a new laptop.",
     "options": [
-      "to",
       "that",
-      "because",
-      "so",
       "in order to",
-      "so that"
+      "so that",
+      "because",
+      "to",
+      "so"
     ],
-    "correctIndex": 5
+    "correctIndex": 2
   },
   {
     "category": "there_are",
     "prompt": "__________ any milk in the fridge?",
     "options": [
-      "is",
       "was",
-      "Is there",
-      "have been",
+      "were",
       "be",
-      "were"
+      "Is there",
+      "is",
+      "have been"
     ],
-    "correctIndex": 2
+    "correctIndex": 3
   },
   {
     "category": "present_simple_question",
     "prompt": "What time __________ you usually __________ to bed?",
     "options": [
       "do / goed",
-      "do / gos",
-      "do / go",
-      "do / goes",
       "do / don't go",
-      "do / going"
+      "do / go",
+      "do / gos",
+      "do / going",
+      "do / goes"
     ],
     "correctIndex": 2
   },
@@ -484,77 +484,77 @@
     "category": "reflexive",
     "prompt": "I enjoyed __________ at the party.",
     "options": [
+      "himself",
       "themselves",
-      "yourself",
-      "itself",
-      "herself",
       "myself",
-      "himself"
+      "herself",
+      "itself",
+      "yourself"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "past_simple_told",
     "prompt": "She __________ me that she was tired.",
     "options": [
-      "don't told",
-      "tolds",
       "told",
-      "toldes",
+      "tolding",
       "tolded",
-      "tolding"
+      "tolds",
+      "don't told",
+      "toldes"
     ],
-    "correctIndex": 2
+    "correctIndex": 0
   },
   {
     "category": "for_duration",
     "prompt": "I have known him __________ three years.",
     "options": [
-      "from",
-      "since",
       "in",
+      "for",
+      "since",
       "at",
       "by",
-      "for"
+      "from"
     ],
-    "correctIndex": 5
+    "correctIndex": 1
   },
   {
     "category": "present_perfect_negative",
     "prompt": "They __________ this movie yet.",
     "options": [
       "did not see",
-      "have not see",
       "has not seen",
-      "have seen",
+      "have not seen",
       "had not seen",
-      "have not seen"
+      "have seen",
+      "have not see"
     ],
-    "correctIndex": 5
+    "correctIndex": 2
   },
   {
     "category": "past_continuous_mixed",
     "prompt": "It was raining when we __________ the house.",
     "options": [
-      "don't left",
-      "lefted",
-      "left",
       "lefting",
+      "leftes",
+      "lefted",
       "lefts",
-      "leftes"
+      "left",
+      "don't left"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "second_conditional",
     "prompt": "If I were you, I __________ that phone.",
     "options": [
+      "might",
+      "could",
+      "would not buy",
       "must",
       "should",
-      "would not buy",
-      "can",
-      "could",
-      "might"
+      "can"
     ],
     "correctIndex": 2
   },
@@ -563,11 +563,11 @@
     "prompt": "The letter __________ yesterday.",
     "options": [
       "was sent",
-      "has been made",
-      "is built",
       "were made",
-      "is made",
-      "was make"
+      "is built",
+      "has been made",
+      "was make",
+      "is made"
     ],
     "correctIndex": 0
   },
@@ -575,14 +575,14 @@
     "category": "dont_have_to",
     "prompt": "You __________ come if you don't want to.",
     "options": [
-      "need",
-      "don't have to",
-      "should",
       "mustn't",
+      "should",
       "must",
-      "have to"
+      "need",
+      "have to",
+      "don't have to"
     ],
-    "correctIndex": 1
+    "correctIndex": 5
   },
   {
     "category": "relative_who",
@@ -590,10 +590,10 @@
     "options": [
       "which",
       "whose",
-      "that",
-      "who",
       "where",
-      "when"
+      "who",
+      "when",
+      "that"
     ],
     "correctIndex": 3
   },
@@ -601,219 +601,219 @@
     "category": "future_going_to",
     "prompt": "I __________ my grandparents this weekend.",
     "options": [
+      "is going",
       "will go",
+      "goes",
       "are going",
       "am going to visit",
-      "was going",
-      "is going",
-      "goes"
+      "was going"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "superlative",
     "prompt": "This is the __________ day of my life.",
     "options": [
-      "better",
-      "bad",
       "worst",
       "good",
       "worse",
+      "better",
+      "bad",
       "best"
     ],
-    "correctIndex": 2
+    "correctIndex": 0
   },
   {
     "category": "infinitive_promise",
     "prompt": "He promised __________ me.",
     "options": [
-      "help",
       "helps",
-      "for help",
       "helping",
       "helped",
-      "to help"
+      "to help",
+      "for help",
+      "help"
     ],
-    "correctIndex": 5
+    "correctIndex": 3
   },
   {
     "category": "preposition_on",
     "prompt": "We live __________ the fifth floor.",
     "options": [
-      "by",
-      "at",
       "to",
+      "by",
       "in",
       "on",
+      "at",
       "for"
     ],
-    "correctIndex": 4
+    "correctIndex": 3
   },
   {
     "category": "article_an",
     "prompt": "She is __________ engineer.",
     "options": [
-      "any",
-      "a",
-      "no",
-      "the",
       "an",
+      "no",
+      "any",
+      "the",
+      "a",
       "some"
     ],
-    "correctIndex": 4
+    "correctIndex": 0
   },
   {
     "category": "quantifier_many",
     "prompt": "There are too __________ cars in the street.",
     "options": [
-      "much",
-      "few",
-      "some",
       "a lot",
+      "much",
+      "some",
       "many",
+      "few",
       "little"
     ],
-    "correctIndex": 4
+    "correctIndex": 3
   },
   {
     "category": "adjective",
     "prompt": "The music is __________.",
     "options": [
-      "loudly",
       "nicely",
-      "badly",
-      "well",
       "quickly",
-      "loud"
+      "loud",
+      "well",
+      "badly",
+      "loudly"
     ],
-    "correctIndex": 5
+    "correctIndex": 2
   },
   {
     "category": "present_continuous",
     "prompt": "Right now I __________ a grammar worksheet.",
     "options": [
-      "is running",
-      "run",
       "was running",
-      "runs",
+      "run",
       "am writing",
-      "are running"
+      "is running",
+      "are running",
+      "runs"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "infinitive_purpose",
     "prompt": "He went to Australia __________ learn English.",
     "options": [
+      "for",
+      "so that",
+      "because",
       "and",
       "in order to",
-      "because",
-      "to",
-      "for",
-      "so that"
+      "to"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "there_are",
     "prompt": "There __________ many books on the shelf.",
     "options": [
-      "is",
+      "have been",
       "were",
-      "was",
-      "are",
+      "is",
       "be",
-      "have been"
+      "are",
+      "was"
     ],
-    "correctIndex": 3
+    "correctIndex": 4
   },
   {
     "category": "present_simple_question",
     "prompt": "How often __________ you __________?",
     "options": [
       "do / exerciseing",
+      "do / don't exercise",
+      "do / exerciseed",
       "do / exercisees",
       "do / exercise",
-      "do / don't exercise",
-      "do / exercises",
-      "do / exerciseed"
+      "do / exercises"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "adjective",
     "prompt": "This exercise is not difficult __________ for me.",
     "options": [
-      "well",
       "quickly",
-      "badly",
-      "nicely",
+      "well",
       "enough",
+      "nicely",
+      "badly",
       "loudly"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "present_perfect_since",
     "prompt": "I have __________ here since I was a child.",
     "options": [
       "liveds",
+      "liveding",
       "lived",
       "livedes",
-      "liveded",
       "don't lived",
-      "liveding"
+      "liveded"
     ],
-    "correctIndex": 1
+    "correctIndex": 2
   },
   {
     "category": "present_simple_habit",
     "prompt": "She always __________ her keys.",
     "options": [
       "ate",
+      "eat",
+      "eats",
       "eating",
       "don't eat",
-      "forgets",
-      "eat",
-      "eats"
+      "forgets"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "present_perfect_never",
     "prompt": "I __________ sushi before.",
     "options": [
       "never tried",
-      "have not tried",
       "has never tried",
+      "have not tried",
+      "have ever tried",
       "had never tried",
-      "have never tried",
-      "have ever tried"
+      "have never tried"
     ],
-    "correctIndex": 4
+    "correctIndex": 5
   },
   {
     "category": "past_continuous_mixed",
     "prompt": "While she __________ on the phone, the baby __________ crying.",
     "options": [
-      "was talking / starteds",
       "was talking / started",
-      "was talking / starteding",
-      "was talking / startedes",
+      "was talking / starteded",
       "was talking / don't started",
-      "was talking / starteded"
+      "was talking / starteds",
+      "was talking / starteding",
+      "was talking / startedes"
     ],
-    "correctIndex": 1
+    "correctIndex": 0
   },
   {
     "category": "first_conditional",
     "prompt": "You will pass the test if you __________ hard.",
     "options": [
-      "will study",
-      "studys",
+      "studying",
       "studied",
       "studyes",
-      "studying",
+      "studys",
+      "will study",
       "study"
     ],
     "correctIndex": 5
@@ -822,103 +822,103 @@
     "category": "past_passive",
     "prompt": "This house __________ in 1995.",
     "options": [
-      "is built",
       "was built",
-      "were made",
       "was make",
       "is made",
-      "was sent"
+      "is built",
+      "was sent",
+      "were made"
     ],
-    "correctIndex": 1
+    "correctIndex": 0
   },
   {
     "category": "modal_might",
     "prompt": "We __________ go to the cinema tonight.",
     "options": [
-      "can",
-      "might",
       "will",
-      "must",
+      "should",
+      "can",
       "would",
-      "should"
+      "might",
+      "must"
     ],
-    "correctIndex": 1
+    "correctIndex": 4
   },
   {
     "category": "relative_that",
     "prompt": "The book __________ I read yesterday was amazing.",
     "options": [
+      "that",
+      "who",
+      "which",
       "whose",
       "where",
-      "when",
-      "which",
-      "who",
-      "that"
+      "when"
     ],
-    "correctIndex": 5
+    "correctIndex": 0
   },
   {
     "category": "going_to_prediction",
     "prompt": "Look at the sky! It __________ to rain soon.",
     "options": [
+      "rained",
       "will rain",
       "is going",
-      "rained",
-      "rains",
+      "is raining",
       "was going",
-      "is raining"
+      "rains"
     ],
-    "correctIndex": 1
+    "correctIndex": 2
   },
   {
     "category": "superlative",
     "prompt": "She is the __________ girl in the class.",
     "options": [
-      "better",
-      "best",
       "good",
-      "tallest",
       "bad",
-      "worst"
+      "better",
+      "worst",
+      "best",
+      "tallest"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "gerund_interested",
     "prompt": "I am interested in __________ new languages.",
     "options": [
-      "learns",
       "learning",
+      "learns",
       "to learn",
-      "learned",
       "learn",
+      "learned",
       "will learn"
     ],
-    "correctIndex": 1
+    "correctIndex": 0
   },
   {
     "category": "prepositions_at_on",
     "prompt": "They arrived __________ the airport __________ time.",
     "options": [
+      "at / by",
+      "at / for",
+      "at / in",
       "at / on",
       "at / at",
-      "at / in",
-      "at / for",
-      "at / by",
       "at / to"
     ],
-    "correctIndex": 0
+    "correctIndex": 3
   },
   {
     "category": "article_an",
     "prompt": "He is __________ honest person.",
     "options": [
-      "a",
       "some",
-      "any",
-      "an",
+      "a",
       "no",
-      "the"
+      "an",
+      "the",
+      "any"
     ],
     "correctIndex": 3
   },
@@ -926,27 +926,27 @@
     "category": "quantifier_little",
     "prompt": "I have very __________ free time.",
     "options": [
-      "a few",
+      "little",
       "a little",
       "many",
-      "little",
       "much",
-      "few"
+      "few",
+      "a few"
     ],
-    "correctIndex": 3
+    "correctIndex": 0
   },
   {
     "category": "adverb",
     "prompt": "She did the test very __________.",
     "options": [
-      "bad",
       "carefully",
-      "slow",
       "good",
-      "quick",
-      "nice"
+      "nice",
+      "slow",
+      "bad",
+      "quick"
     ],
-    "correctIndex": 1
+    "correctIndex": 0
   },
   {
     "category": "present_perfect_for",
@@ -955,9 +955,9 @@
       "have lived",
       "lived",
       "has lived",
+      "have live",
       "have living",
-      "had lived",
-      "have live"
+      "had lived"
     ],
     "correctIndex": 0
   },
@@ -965,77 +965,77 @@
     "category": "infinitive_purpose",
     "prompt": "I called my friend __________ invite her to my birthday.",
     "options": [
-      "and",
-      "to",
-      "because",
       "so that",
       "in order to",
+      "because",
+      "to",
+      "and",
       "for"
     ],
-    "correctIndex": 1
+    "correctIndex": 3
   },
   {
     "category": "there_is",
     "prompt": "There __________ some water in the bottle.",
     "options": [
       "are",
+      "were",
       "was",
-      "is",
-      "have been",
       "be",
-      "were"
+      "is",
+      "have been"
     ],
-    "correctIndex": 2
+    "correctIndex": 4
   },
   {
     "category": "past_simple_question_negative",
     "prompt": "Why __________ he __________ the phone?",
     "options": [
-      "didn't / don't answer",
-      "didn't / answer",
       "didn't / answeres",
-      "didn't / answering",
       "didn't / answered",
-      "didn't / answers"
+      "didn't / answering",
+      "didn't / don't answer",
+      "didn't / answers",
+      "didn't / answer"
     ],
-    "correctIndex": 1
+    "correctIndex": 5
   },
   {
     "category": "reflexive",
     "prompt": "I hurt __________ while playing football.",
     "options": [
-      "yourself",
-      "herself",
-      "itself",
+      "myself",
       "himself",
+      "herself",
+      "yourself",
       "themselves",
-      "myself"
+      "itself"
     ],
-    "correctIndex": 5
+    "correctIndex": 0
   },
   {
     "category": "present_perfect_just",
     "prompt": "She has __________ home.",
     "options": [
-      "have lived",
-      "just arriving",
+      "just arrived",
       "was",
       "had lived",
-      "just arrived",
-      "has lived"
+      "just arriving",
+      "has lived",
+      "have lived"
     ],
-    "correctIndex": 4
+    "correctIndex": 0
   },
   {
     "category": "present_simple_habit",
     "prompt": "He sometimes __________ basketball after school.",
     "options": [
+      "eating",
+      "eats",
+      "plays",
       "don't eat",
       "ate",
-      "plays",
-      "eat",
-      "eats",
-      "eating"
+      "eat"
     ],
     "correctIndex": 2
   },
@@ -1043,77 +1043,77 @@
     "category": "present_perfect_question",
     "prompt": "How long __________ you __________ your best friend?",
     "options": [
-      "have / don't known",
-      "have / knowned",
-      "have / knowning",
+      "have / knowns",
       "have / known",
       "have / knownes",
-      "have / knowns"
+      "have / knowned",
+      "have / don't known",
+      "have / knowning"
     ],
-    "correctIndex": 3
+    "correctIndex": 1
   },
   {
     "category": "past_simple",
     "prompt": "I was sleeping when you __________ me.",
     "options": [
       "calleds",
+      "calledes",
       "calleded",
       "calleding",
       "called",
-      "don't called",
-      "calledes"
+      "don't called"
     ],
-    "correctIndex": 3
+    "correctIndex": 4
   },
   {
     "category": "first_conditional_negative",
     "prompt": "If we __________, we will miss the bus.",
     "options": [
-      "didn't hurry",
       "hurrys",
+      "not hurry",
+      "didn't hurry",
       "don't hurry",
-      "hurry",
       "doesn't hurry",
-      "not hurry"
+      "hurry"
     ],
-    "correctIndex": 2
+    "correctIndex": 3
   },
   {
     "category": "present_passive",
     "prompt": "The food __________ by the waiters.",
     "options": [
-      "is speaks",
       "are served",
-      "is serve",
-      "is served",
+      "is speaks",
       "was served",
-      "was spoken"
+      "is serve",
+      "was spoken",
+      "is served"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "modal_should",
     "prompt": "Students __________ respect their teachers.",
     "options": [
-      "can",
-      "must",
-      "might",
       "have to",
+      "might",
       "should",
-      "don't have to"
+      "don't have to",
+      "must",
+      "can"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "relative_where",
     "prompt": "This is the restaurant __________ we ate last week.",
     "options": [
-      "whose",
-      "that",
-      "where",
       "which",
-      "who",
-      "when"
+      "when",
+      "where",
+      "that",
+      "whose",
+      "who"
     ],
     "correctIndex": 2
   },
@@ -1122,24 +1122,24 @@
     "prompt": "I __________ to the party tomorrow.",
     "options": [
       "will go",
+      "are going",
       "was going",
-      "goes",
-      "am not going",
       "is going",
-      "are going"
+      "goes",
+      "am not going"
     ],
-    "correctIndex": 3
+    "correctIndex": 5
   },
   {
     "category": "comparative",
     "prompt": "Mathematics is __________ than history for me.",
     "options": [
       "expensiver",
-      "expensive",
+      "less expensive",
       "most expensive",
-      "more expensive",
+      "expensive",
       "more difficult",
-      "less expensive"
+      "more expensive"
     ],
     "correctIndex": 4
   },
@@ -1147,64 +1147,64 @@
     "category": "gerund_stop",
     "prompt": "He stopped __________ last year.",
     "options": [
-      "smoking",
-      "smoks",
+      "smoked",
+      "will smok",
       "to smok",
       "smok",
-      "will smok",
-      "smoked"
+      "smoking",
+      "smoks"
     ],
-    "correctIndex": 0
+    "correctIndex": 4
   },
   {
     "category": "preposition_by",
     "prompt": "She goes to school __________ bus.",
     "options": [
-      "by",
-      "for",
-      "at",
-      "with",
+      "on",
       "in",
-      "on"
+      "at",
+      "for",
+      "by",
+      "with"
     ],
-    "correctIndex": 0
+    "correctIndex": 4
   },
   {
     "category": "superlative_the",
     "prompt": "Mount Everest is __________ highest mountain in the world.",
     "options": [
+      "the",
       "a",
       "most",
-      "the",
-      "an",
       "more",
+      "an",
       "best"
     ],
-    "correctIndex": 2
+    "correctIndex": 0
   },
   {
     "category": "quantifier_much",
     "prompt": "There isn't __________ traffic today.",
     "options": [
-      "a lot",
-      "little",
-      "many",
       "much",
       "some",
-      "few"
+      "few",
+      "many",
+      "little",
+      "a lot"
     ],
-    "correctIndex": 3
+    "correctIndex": 0
   },
   {
     "category": "adverb",
     "prompt": "He looked at me __________.",
     "options": [
+      "quick",
       "good",
-      "bad",
       "nice",
       "slow",
       "angrily",
-      "quick"
+      "bad"
     ],
     "correctIndex": 4
   },
@@ -1212,51 +1212,51 @@
     "category": "present_simple",
     "prompt": "She __________ in a bank now.",
     "options": [
-      "went",
-      "going",
       "go",
       "works",
-      "goes",
-      "work"
+      "went",
+      "going",
+      "work",
+      "goes"
     ],
-    "correctIndex": 3
+    "correctIndex": 1
   },
   {
     "category": "infinitive_purpose",
     "prompt": "I study hard __________ get good grades.",
     "options": [
       "in order to",
-      "for",
-      "and",
       "because",
       "to",
-      "so that"
+      "and",
+      "so that",
+      "for"
     ],
-    "correctIndex": 4
+    "correctIndex": 2
   },
   {
     "category": "there_question",
     "prompt": "__________ any chairs in the room?",
     "options": [
-      "There are",
+      "Was there",
+      "Were there",
       "There is",
       "Are there",
-      "Was there",
-      "Is there",
-      "Were there"
+      "There are",
+      "Is there"
     ],
-    "correctIndex": 2
+    "correctIndex": 3
   },
   {
     "category": "present_continuous",
     "prompt": "What __________ your brother __________ these days?",
     "options": [
       "is / doinged",
-      "is / doinging",
-      "is / don't doing",
+      "is / doinges",
       "is / doings",
+      "is / doinging",
       "is / doing",
-      "is / doinges"
+      "is / don't doing"
     ],
     "correctIndex": 4
   },
@@ -1264,39 +1264,39 @@
     "category": "reflexive",
     "prompt": "We __________ ourselves on vacation.",
     "options": [
-      "enjoyed",
-      "himself",
-      "itself",
-      "herself",
       "yourself",
-      "myself"
+      "himself",
+      "enjoyed",
+      "itself",
+      "myself",
+      "herself"
     ],
-    "correctIndex": 0
+    "correctIndex": 2
   },
   {
     "category": "present_perfect",
     "prompt": "I have __________ this film three times.",
     "options": [
       "don't seen",
-      "seenes",
       "seens",
+      "seen",
       "seened",
-      "seening",
-      "seen"
+      "seenes",
+      "seening"
     ],
-    "correctIndex": 5
+    "correctIndex": 2
   },
   {
     "category": "present_simple_negative",
     "prompt": "She usually __________ meat.",
     "options": [
-      "don't eat",
-      "didn't like",
-      "not like",
-      "don't like",
+      "doesn't like",
       "doesn't eat",
-      "doesn't like"
+      "don't eat",
+      "not like",
+      "didn't like",
+      "don't like"
     ],
-    "correctIndex": 4
+    "correctIndex": 1
   }
 ]

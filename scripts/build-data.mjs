@@ -15,7 +15,7 @@ const OUT_E = path.join(ROOT, 'public', 'explanations.json')
 const BLANK = '__________'
 
 function readFile(p) {
-  return fs.readFileSync(p, 'utf8')
+  return fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n')
 }
 
 function normalizeApostrophe(s) {
