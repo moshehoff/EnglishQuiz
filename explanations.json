@@ -1,0 +1,487 @@
+{
+  "present_perfect_never": {
+    "title": "Present Perfect — never",
+    "explanation": "Present Perfect עם \"never\" (לעולם לא) משמש לדבר על חוויות עד כה. \"Never\" מחזיק במשמעות שלילית, והמילה \"before\" (לפני) מציינת עד עכשיו. המבנה: have/has + never + past participle. עם \"I\" משתמשים ב-have. פעלים בלתי רגילים משנים צורה: eat → ate → eaten.",
+    "examples": [
+      "She has never visited Paris.",
+      "I have never visited Paris."
+    ]
+  },
+  "past_continuous_dual": {
+    "title": "Past Continuous — שתי פעולות",
+    "explanation": "Past Continuous (was/were + verb-ing) משמש לשתי פעולות שהתקיימו בו-זמנית בעבר. המילה \"While\" מציינת שפעולה אחת התרחשה במהלך פעולה אחרת. שתי הפעולות נמצאות ב-Past Continuous. עם נושא יחיד: was + verb-ing, עם רבים: were + verb-ing.",
+    "examples": [
+      "While I was eating, my phone was ringing."
+    ]
+  },
+  "second_conditional": {
+    "title": "Second Conditional",
+    "explanation": "Second Conditional (תנאי דמיוני או לא מציאותי) משמש כשהתנאי לא מתקיים במציאות. החלק עם If נמצא ב-Past Simple, והחלק השני ב-would + פועל. לעיתים משתמשים ב-were לכל הנושאים: \"If I were you\". הפועל \"win\" בעבר: won.",
+    "examples": [
+      "If I won a million dollars, I would help my family.",
+      "If she were here, she would help us."
+    ]
+  },
+  "past_passive": {
+    "title": "Passive Voice — Past Simple",
+    "explanation": "Past Simple Passive (סביל בעבר פשוט) מתאר פעולה שבוצעה על ידי מישהו אחר בעבר. המבנה: was/were + past participle. עם נושא יחיד: was made, עם רבים: were made. הפועל \"make\" בלתי רגיל: make → made → made.",
+    "examples": [
+      "The book was written in 2020.",
+      "The book was published last year."
+    ]
+  },
+  "modal_should": {
+    "title": "Modal — should",
+    "explanation": "Modal \"should\" משמש להבעת המלצה או עצה. אחרי modal verbs הפועל מגיע בצורת הבסיס (ללא to, ללא -s). המבנה: should + פועל (בסיס). דומה ל-\"ought to\" אבל נפוץ יותר בדיבור יומיומי.",
+    "examples": [
+      "You should exercise more.",
+      "You should help your parents."
+    ]
+  },
+  "relative_who": {
+    "title": "Relative Clause — who",
+    "explanation": "Relative pronoun \"who\" משמש להתייחס לאנשים. הוא מחבר בין שני חלקי משפט ומתאר את האדם. המבנה: שם עצם (אדם) + who + פועל/משפט. \"Which\" משמש לדברים, \"where\" למקומות.",
+    "examples": [
+      "The man who lives upstairs is friendly.",
+      "The man who called is my uncle."
+    ]
+  },
+  "future_will": {
+    "title": "Future — will",
+    "explanation": "Future Simple עם \"will\" משמש לחיזוי או דעה על העתיד. המילה \"think\" מציינת שזו דעה ולא עובדה. המבנה: will + פועל (בסיס). עם נושא שלישי: \"it will snow\". \"Will\" לא משתנה לפי נושא.",
+    "examples": [
+      "I think it will be hot tomorrow.",
+      "I think it will be great."
+    ]
+  },
+  "superlative": {
+    "title": "Superlative",
+    "explanation": "Superlative (עליון) משמש להשוואה בין שלושה או יותר. עם שמות תואר קצרים: the + -est (good → the best, bad → the worst). עם שמות תואר ארוכים: the most + adjective. תמיד מוסיפים \"the\" לפני צורת העליון.",
+    "examples": [
+      "This is the best restaurant in the city.",
+      "This is the funniest story."
+    ]
+  },
+  "gerund_good_at": {
+    "title": "Gerund — good at",
+    "explanation": "אחרי הביטוי \"good at\" (טוב ב-) משתמשים ב-Gerund (פועל + -ing), לא ב-infinitive. המבנה: be + good at + verb-ing. הפועל \"dance\" הופך ל-\"dancing\". אותו כלל חל על \"excellent at\", \"bad at\".",
+    "examples": [
+      "He is excellent at swimming."
+    ]
+  },
+  "prepositions_dual": {
+    "title": "Prepositions — place & time",
+    "explanation": "מילות יחס של מקום וזמן: \"at\" לנקודה ספציפית (at the cinema, at the station), \"in\" לתוך מקום (in the room). לזמן: \"at\" לשעה מדויקת (at 8 o'clock), \"on\" ליום (on Monday), \"in\" לחודש/שנה (in May).",
+    "examples": [
+      "We arrived at the station at 9."
+    ]
+  },
+  "article_an": {
+    "title": "Articles — a / an / the",
+    "explanation": "הארטיקל \"an\" משמש לפני מילה שמתחילה בצליל תנועה (a, e, i, o, u). \"A\" לפני צליל עיצור. חשוב הצליל ולא האות: \"an hour\" (הצליל שקט), \"a university\" (הצליל y).",
+    "examples": [
+      "There is an orange on the plate.",
+      "He is an actor."
+    ]
+  },
+  "quantifier_few": {
+    "title": "Quantifiers — few",
+    "explanation": "\"Few\" משמש עם שמות עצם ספירים (countable) ומציין מספר קטן — לעיתים עם גוון שלילי (מעט מדי). \"A few\" = כמה (חיובי). \"Little\" הוא המקבילה ל-uncountable nouns. \"Many\" = הרבה (ספירים).",
+    "examples": [
+      "I have few problems."
+    ]
+  },
+  "adverb": {
+    "title": "Adverbs",
+    "explanation": "תואר הפועל (adverb) מתאר איך פעולה נעשית. \"Well\" (היטב) הוא תואר הפועל של \"good\". אחרי פועל כמו \"speaks\" או \"runs\" נשתמש בתואר הפועל, לא בשם התואר. שמות תואר קצרים: נוסיף -ly (quick → quickly).",
+    "examples": [
+      "She dances beautifully.",
+      "She sings beautifully."
+    ]
+  },
+  "present_continuous": {
+    "title": "Present Continuous",
+    "explanation": "Present Continuous (am/is/are + verb-ing) משמש לפעולות שמתרחשות ברגע הדיבור. מילות רמז: \"Look!\", \"Right now\", \"now\". המבנה: am/is/are + פועל + -ing. עם \"The dog\" (it): is running. עם \"They\": are playing.",
+    "examples": [
+      "The children are playing outside.",
+      "They are playing now."
+    ]
+  },
+  "infinitive_purpose": {
+    "title": "Infinitive of purpose",
+    "explanation": "Infinitive of purpose (to + פועל) מסביר למה עשינו משהו — מה המטרה. המבנה: פועל עבר + to + פועל (בסיס). \"I went to the shop to buy milk\" = הלכתי לחנות כדי לקנות חלב. אפשר גם \"in order to\".",
+    "examples": [
+      "I went home to rest.",
+      "I came here to see you."
+    ]
+  },
+  "there_were": {
+    "title": "There were",
+    "explanation": "משפטי \"There is/are\" בעבר: There was (יחיד), There were (רבים). הנושא האמיתי בא אחרי הפועל. \"A lot of people\" הוא נושא רבים → were. \"A lot of noise\" הוא uncountable → was. מילות זמן כמו \"last night\" מציינות עבר.",
+    "examples": [
+      "There were many students.",
+      "There were many people at the concert yesterday."
+    ]
+  },
+  "present_simple_habit": {
+    "title": "Present Simple — הרגל",
+    "explanation": "Present Simple משמש להרגלים, שגרה ופעולות חוזרות. מילות תדירות: always, usually, every day, often, sometimes, never. עם נושא יחיד (he/she/it) מוסיפים -s לפועל: wakes, eats, forgets.",
+    "examples": [
+      "He wakes up at 6 every day.",
+      "We always go to school by bus."
+    ]
+  },
+  "too_enough": {
+    "title": "Too / Enough",
+    "explanation": "\"Too\" = יותר מדי (שלילי): \"too heavy\" = כבד מדי. \"Enough\" = מספיק, בא אחרי שם תואר: \"old enough\". \"Not + adjective + enough\" = לא מספיק: \"not difficult enough\".",
+    "examples": [
+      "This shirt is too small."
+    ]
+  },
+  "since": {
+    "title": "Since",
+    "explanation": "\"Since\" + נקודת זמן (2015, Monday, I was a child) משמש עם Present Perfect לפעולה שהחלה בעבר ונמשכת. שונה מ-\"for\" שמציין משך זמן. המבנה: have/has + past participle + since + זמן.",
+    "examples": [
+      "I have lived here since 2018."
+    ]
+  },
+  "present_simple_negative": {
+    "title": "Present Simple — שלילה",
+    "explanation": "שלילה ב-Present Simple: עם I/you/we/they → don't + פועל (בסיס). עם he/she/it → doesn't + פועל (בסיס). \"Doesn't\" = does + not. הפועל אחרי doesn't ללא -s: doesn't eat, doesn't like.",
+    "examples": [
+      "She doesn’t like chocolate.",
+      "He doesn’t like chocolate."
+    ]
+  },
+  "present_perfect_already": {
+    "title": "Present Perfect — already",
+    "explanation": "Present Perfect עם \"already\" (כבר) מציין פעולה שהסתיימה לאחרונה והתוצאה רלוונטית להווה. המבנה: have/has + already + past participle. עם \"She\" → has already finished. הפועל \"finish\" רגיל: finished.",
+    "examples": [
+      "I have already eaten lunch.",
+      "They have already arrived."
+    ]
+  },
+  "past_continuous": {
+    "title": "Past Continuous",
+    "explanation": "Past Continuous (was/were + verb-ing) לפעולה ממושכת בעבר, לרוב כשפעולה אחרת קטעה אותה. \"When I called\" = נקודת זמן → הפעולה הממושכת ב-was/were + -ing. \"She was watching a movie when I called.\"",
+    "examples": [
+      "While I was eating, she was talking on the phone.",
+      "When I came home, my parents were cooking."
+    ]
+  },
+  "first_conditional": {
+    "title": "First Conditional",
+    "explanation": "First Conditional לתנאים מציאותיים שעשויים להתקיים בעתיד. חלק If: Present Simple. חלק התוצאה: will + פועל. \"If it rains, we will stay\" — הגשם אפשרי, וההישארות תלויה בו.",
+    "examples": [
+      "If you study hard, you will pass the test.",
+      "If you hurry, you will catch the bus."
+    ]
+  },
+  "present_passive": {
+    "title": "Passive Voice — Present Simple",
+    "explanation": "Present Simple Passive (סביל בהווה פשוט) מתאר פעולות שמתרחשות באופן כללי. המבנה: am/is/are + past participle. \"English is spoken\" = מדברים אנגלית. \"Dinner is served\" = מגישים ארוחת ערב.",
+    "examples": [
+      "Hebrew is spoken in Israel.",
+      "Dinner is served at 8 o’clock."
+    ]
+  },
+  "modal_must": {
+    "title": "Modal — must",
+    "explanation": "Modal \"must\" מביע חובה חזקה. שונה מ-\"have to\" — must מדגיש את דעת הדובר. אחרי must הפועל בצורת בסיס: must finish, must wear. שלילה: mustn't = אסור.",
+    "examples": [
+      "You must wear a seatbelt.",
+      "He can swim very well."
+    ]
+  },
+  "relative_where": {
+    "title": "Relative Clause — where",
+    "explanation": "Relative pronoun \"where\" משמש למקומות. מחבר משפט שמתאר מקום לשם העצם של המקום. \"Tel Aviv is a city where many tourists visit\" = עיר שבה מבקרים תיירים.",
+    "examples": [
+      "This is the hotel where we stayed.",
+      "This is the place where I was born."
+    ]
+  },
+  "future_going_to": {
+    "title": "Future — going to (plans)",
+    "explanation": "Present Continuous לתוכניות עתיד מתוכננות (planned future). כשיש תוכנית שכבר נקבעה, משתמשים ב-am/is/are + going + to. \"We are going to the beach next weekend\" = כבר תיכננו.",
+    "examples": [
+      "I am meeting my friends tomorrow.",
+      "She is going to study tonight."
+    ]
+  },
+  "comparative": {
+    "title": "Comparatives",
+    "explanation": "Comparative (השוואה) בין שני דברים. שמות תואר קצרים: -er (fast → faster, expensive → more expensive). תמיד עם \"than\". שמות תואר ארוכים: more + adjective. \"More difficult than history\".",
+    "examples": [
+      "This car is faster than that one.",
+      "English is easier than math."
+    ]
+  },
+  "gerund_after_hate": {
+    "title": "Gerund — after hate/love",
+    "explanation": "אחרי פעלים כמו hate, love, enjoy, like משתמשים ב-Gerund (verb-ing), לא ב-infinitive. \"I hate waiting\" = אני שונא להמתין. \"She loves swimming\" = היא אוהבת לשחות.",
+    "examples": [
+      "She loves swimming in the sea.",
+      "I enjoy reading books in the evening."
+    ]
+  },
+  "preposition_in_time": {
+    "title": "Prepositions — in (time)",
+    "explanation": "מילת יחס \"in\" לזמן: חודשים (in May), שנים (in 2009), עונות (in summer), חלקי היום (in the morning). \"On\" לימים ותאריכים (on Monday). \"At\" לשעות (at 9).",
+    "examples": [
+      "He was born in December in 2010.",
+      "The meeting starts at 3 o'clock."
+    ]
+  },
+  "superlative_the": {
+    "title": "Superlative — the",
+    "explanation": "בצורת Superlative תמיד מוסיפים \"the\" לפני: the most beautiful, the best, the tallest. המבנה: the + superlative + ביטוי (in the class, I know). בלי \"the\" — לא תקין.",
+    "examples": [
+      "This is the best day of my life.",
+      "She is the smartest student."
+    ]
+  },
+  "quantifier_much": {
+    "title": "Quantifiers — much",
+    "explanation": "\"Much\" עם שמות עצם לא ספירים (uncountable): money, water, time, traffic. בשאלות: \"How much money?\". בשלילה: \"not much traffic\". \"Many\" הוא לספירים.",
+    "examples": [
+      "How much water do you drink?",
+      "I don’t have much time."
+    ]
+  },
+  "so_that": {
+    "title": "So that",
+    "explanation": "\"So that\" מביע מטרה — למה עושים משהו, בדומה ל-\"in order to\" אבל עם משפט שלם. \"She saved money so that she could buy a laptop\" = חסכה כדי שתוכל לקנות.",
+    "examples": [
+      "I study hard so that I can get good grades."
+    ]
+  },
+  "there_are": {
+    "title": "There are",
+    "explanation": "\"There are\" + שם עצם ברבים (many books, three chairs). \"There is\" + יחיד או uncountable. בשאלות: \"Are there any chairs?\" / \"Is there any milk?\". הפועל תואם לנושא שאחריו.",
+    "examples": [
+      "Is there any bread left?",
+      "There are three chairs."
+    ]
+  },
+  "present_simple_question": {
+    "title": "Present Simple — שאלה",
+    "explanation": "שאלות ב-Present Simple: עם do/does + נושא + פועל (בסיס). Does לנושא יחיד: \"What time do you go?\" / \"How often do you exercise?\". Do ל-I/you/we/they.",
+    "examples": [
+      "Where do you live?",
+      "How often do you go swimming?"
+    ]
+  },
+  "reflexive": {
+    "title": "Reflexive pronouns",
+    "explanation": "Reflexive pronouns (myself, yourself, himself, herself, itself, ourselves, yourselves, themselves) כשהפועל חוזר על הנושא. \"I enjoyed myself\" = נהניתי. \"She burned herself\" = שרפה את עצמה.",
+    "examples": [
+      "We enjoyed ourselves on vacation.",
+      "She burned herself while cooking."
+    ]
+  },
+  "past_simple_told": {
+    "title": "Past Simple — tell/told",
+    "explanation": "הפועל \"tell\" בלתי רגיל: tell → told → told. אחריו בא אובייקט (מישהו): told me, told us. \"She told me that she was tired\" = היא אמרה לי שהיא עייפה.",
+    "examples": [
+      "He told us the truth."
+    ]
+  },
+  "for_duration": {
+    "title": "For — משך זמן",
+    "explanation": "\"For\" + משך זמן (three years, ten years, a week) עם Present Perfect. מציין כמה זמן הפעולה נמשכת. שונה מ-\"since\" שמציין נקודת התחלה. \"I have known him for three years.\"",
+    "examples": [
+      "She has lived here for ten years."
+    ]
+  },
+  "present_perfect_negative": {
+    "title": "Present Perfect — שלילה עם yet",
+    "explanation": "Present Perfect שלילי עם \"yet\" (עדיין לא): have/has + not + past participle + yet. \"They have not seen this movie yet\" = עדיין לא ראו. עם he/she/it: hasn't. הפועל \"see\": seen.",
+    "examples": [
+      "I haven’t finished yet.",
+      "He hasn't seen the movie yet."
+    ]
+  },
+  "past_continuous_mixed": {
+    "title": "Past Continuous + Past Simple",
+    "explanation": "שילוב Past Continuous + Past Simple: פעולה ממושכת (was/were + -ing) מופרעת על ידי פעולה קצרה (Past Simple). \"While she was talking, the baby started crying\" — הדיבור ממושך, הבכי קטע אותו.",
+    "examples": [
+      "She arrived when I was cooking.",
+      "While I was driving, I saw an accident."
+    ]
+  },
+  "dont_have_to": {
+    "title": "Don't have to",
+    "explanation": "\"Don't have to\" = אין חובה (אפשר אבל לא חייב). שונה מ-\"mustn't\" = אסור. \"You don't have to come\" = אתה לא חייב לבוא, אבל מותר. ביטוי נפוץ ופחות רשמי מ-\"need not\".",
+    "examples": [
+      "You don’t have to finish it today."
+    ]
+  },
+  "infinitive_promise": {
+    "title": "Infinitive — after promise",
+    "explanation": "אחרי הפועל \"promise\" משתמשים ב-infinitive (to + פועל): promised to help. פעלים דומים: decide, want, hope, plan, agree. \"He promised to help me\" = הבטיח לעזור.",
+    "examples": [
+      "She decided to stay home."
+    ]
+  },
+  "preposition_on": {
+    "title": "Prepositions — on",
+    "explanation": "מילת יחס \"on\" לקומות בבניין: on the third floor, on the fifth floor. גם לימים ותאריכים: on Monday, on my birthday. \"At\" לכתובת כללית, \"in\" לתוך חדר.",
+    "examples": [
+      "They live on the third floor."
+    ]
+  },
+  "quantifier_many": {
+    "title": "Quantifiers — many",
+    "explanation": "\"Many\" עם שמות עצם ספירים (cars, people, books). \"Too many\" = יותר מדי. \"Much\" ל-uncountable. \"A lot of\" מתאים לשניהם. \"There are too many cars in the street.\"",
+    "examples": [
+      "There are too many people."
+    ]
+  },
+  "adjective": {
+    "title": "Adjectives",
+    "explanation": "שם תואר (adjective) מתאר שם עצם. אחרי הפועל \"is/was\" בא שם תואר, לא תואר פועל: \"The music is loud\" (לא loudly). \"Interesting\" מתאר את הסרט/התרגיל.",
+    "examples": [
+      "The movie was interesting.",
+      "She is not old enough."
+    ]
+  },
+  "present_perfect_since": {
+    "title": "Present Perfect — since",
+    "explanation": "Present Perfect עם \"since\" (מ-) לפעולה שהחלה בעבר ונמשכת. \"Since 2015\" / \"since I was a child\" = נקודת התחלה. המבנה: have/has + past participle + since + זמן.",
+    "examples": [
+      "We have known each other since 2018.",
+      "They have been here since morning."
+    ]
+  },
+  "modal_might": {
+    "title": "Modal — might",
+    "explanation": "Modal \"might\" מביע אפשרות — אולי יקרה, אולי לא. חלש יותר מ-\"will\". \"We might go to the cinema\" = אולי נלך. אחרי might: פועל בצורת בסיס.",
+    "examples": [
+      "It might rain tomorrow."
+    ]
+  },
+  "relative_that": {
+    "title": "Relative Clause — that",
+    "explanation": "Relative pronoun \"that\" משמש לדברים (ולפעמים גם לאנשים). \"The book that I read\" = הספר שקראתי. ניתן להחליף ב-which לדברים, אבל \"that\" נפוץ יותר בדיבור.",
+    "examples": [
+      "The movie that we watched was boring."
+    ]
+  },
+  "going_to_prediction": {
+    "title": "Going to — prediction",
+    "explanation": "\"Going to\" לחיזוי כשיש ראיה בוהקת: \"Look at the sky! It is going to rain.\" שונה מ-\"will\" לחיזוי כללי. המבנה: am/is/are + going to + פועל.",
+    "examples": [
+      "She is going to win the game."
+    ]
+  },
+  "gerund_interested": {
+    "title": "Gerund — interested in",
+    "explanation": "אחרי \"interested in\" (מעוניין ב-) משתמשים ב-Gerund: interested in learning. אותו כלל ל-\"good at drawing\", \"tired of waiting\". המבנה: be + interested in + verb-ing.",
+    "examples": [
+      "She is good at drawing."
+    ]
+  },
+  "prepositions_at_on": {
+    "title": "Prepositions — at / on",
+    "explanation": "\"At\" לנקודה ספציפית: at the airport, at school, at home. \"On time\" = בזמן (לא מאחר). \"In time\" = בזמן (הספיק לפני משהו). \"They arrived at the airport on time.\"",
+    "examples": [
+      "We arrived at school on time."
+    ]
+  },
+  "quantifier_little": {
+    "title": "Quantifiers — little",
+    "explanation": "\"Little\" עם uncountable (time, water, money) = מעט (לעיתים שלילי — מעט מדי). \"A little\" = קצת (חיובי). \"Few\" הוא המקבילה לספירים. \"I have very little free time.\"",
+    "examples": [
+      "There is little water left."
+    ]
+  },
+  "present_perfect_for": {
+    "title": "Present Perfect — for",
+    "explanation": "Present Perfect עם \"for\" + משך זמן: for 25 years, for many years. מציין כמה זמן הפעולה נמשכת עד עכשיו. \"My parents have lived in Tel Aviv for 25 years.\"",
+    "examples": [
+      "We have studied English for many years.",
+      "I have studied English for three years."
+    ]
+  },
+  "there_is": {
+    "title": "There is",
+    "explanation": "\"There is\" + יחיד או uncountable (some water, some milk). \"There are\" + רבים. \"Is there\" בשאלות על יחיד: \"Is there any milk in the fridge?\"",
+    "examples": [
+      "There is some milk in the fridge."
+    ]
+  },
+  "past_simple_question_negative": {
+    "title": "Past Simple — שאלה שלילית",
+    "explanation": "שאלות שליליות ב-Past Simple: Didn't + נושא + פועל (בסיס)? או: Wh-word + didn't + נושא + פועל? \"Why didn't he answer?\" = למה הוא לא ענה?",
+    "examples": [
+      "Why didn’t you come yesterday?"
+    ]
+  },
+  "present_perfect_just": {
+    "title": "Present Perfect — just",
+    "explanation": "Present Perfect עם \"just\" (זה עתה) לפעולה שהסתיימה הרגע. \"She has just arrived\" = הרגע הגיעה. \"Just\" בא אחרי have/has ולפני ה-past participle.",
+    "examples": [
+      "I have just finished my homework."
+    ]
+  },
+  "present_perfect_question": {
+    "title": "Present Perfect — שאלה",
+    "explanation": "שאלות Present Perfect עם \"How long\": How long + have/has + נושא + past participle? \"How long have you known your best friend?\" = כמה זמן אתה מכיר את החבר הכי טוב שלך?",
+    "examples": [
+      "How long have you lived here?"
+    ]
+  },
+  "past_simple": {
+    "title": "Past Simple",
+    "explanation": "Past Simple לפעולות שהסתיימו בעבר. פעולה קצרה שקטעה פעולה ממושכת: \"I was sleeping when you called\" — השינה ממושכת (Continuous), השיחה קטעה (Simple). \"Called\" = Past Simple.",
+    "examples": [
+      "She arrived when I was eating.",
+      "We finished the test an hour ago."
+    ]
+  },
+  "first_conditional_negative": {
+    "title": "First Conditional — שלילה",
+    "explanation": "First Conditional שלילי: If + don't/doesn't + פועל, will not/won't + פועל. \"If we don't hurry, we will miss the bus\" — אם לא נמהר, נפספס. שני החלקים קשורים לעתיד.",
+    "examples": [
+      "If you don’t study, you won’t pass."
+    ]
+  },
+  "gerund_stop": {
+    "title": "Gerund — after stop",
+    "explanation": "אחרי \"stop\" + gerund = הפסיק לעשות משהו: stopped smoking = הפסיק לעשות (לעשן). שונה מ-\"stop to do\" = עצר כדי לעשות. \"He stopped smoking last year.\"",
+    "examples": [
+      "She started learning Spanish."
+    ]
+  },
+  "preposition_by": {
+    "title": "Prepositions — by",
+    "explanation": "\"By\" לאמצעי תחבורה: by bus, by car, by train, by plane. בלי the לפני האמצעי. \"On foot\" = ברגל (יוצא מן הכלל). \"She goes to school by bus.\"",
+    "examples": [
+      "I go to work by car."
+    ]
+  },
+  "present_simple": {
+    "title": "Present Simple",
+    "explanation": "Present Simple לעובדות, מצב נוכחי, ולוחות זמנים. \"She works in a bank now\" = עובדת עכשיו (מצב). \"The bus leaves at 7:30\" = לוח זמנים קבוע. עם it/he/she: פועל + -s.",
+    "examples": [
+      "He lives in Tel Aviv.",
+      "The bus leaves at 7:30 every morning."
+    ]
+  },
+  "there_question": {
+    "title": "There is / There are — שאלה",
+    "explanation": "שאלות עם There is/are: Is there...? (יחיד), Are there...? (רבים). \"Are there any chairs in the room?\" = האם יש כיסאות? הפועל הראשון תואם לנושא.",
+    "examples": [
+      "Are there any questions?"
+    ]
+  },
+  "present_perfect": {
+    "title": "Present Perfect",
+    "explanation": "Present Perfect לפעולות שהסתיימו בעבר אבל רלוונטיות להווה, או חוויות. ללא מילת זמן ספציפית בעבר (לא yesterday). \"I have seen this film three times\" = ראיתי שלוש פעמים (עד עכשיו).",
+    "examples": [
+      "She has visited Jerusalem twice.",
+      "Have you ever seen a lion?"
+    ]
+  }
+}
