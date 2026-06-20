@@ -9,6 +9,10 @@ const MODALS = ['should', 'must', 'might', 'can', 'could', 'will', 'would', "don
 const RELATIVES = ['who', 'which', 'that', 'where', 'when', 'whose']
 const AUX_DO = ['do', 'does', 'did', "don't", "doesn't", "didn't"]
 const THERE_FORMS = ['There is', 'There are', 'Is there', 'Are there', 'Was there', 'Were there']
+const CONTRACTION_AUX = new Set([
+  "haven't", "hasn't", "hadn't", "don't", "doesn't", "didn't",
+  "isn't", "aren't", "wasn't", "weren't", "won't", "wouldn't", "can't", "couldn't",
+])
 
 /** base → { s, past, pp, ing } — verbs that appear in the quiz */
 const IRREGULAR = {
@@ -133,9 +137,75 @@ function baseFromGerund(answer) {
   return guessBase(w)
 }
 
+/** Parse have/has/had answers including contractions (hasn't, haven't, etc.) */
+function parseHaveAnswer(answer) {
+  const a = answer.trim()
+
+  let m = a.match(/^(haven't|hasn't|hadn't)\s+(.+)$/i)
+  if (m) return { aux: m[1].toLowerCase(), negative: true, modifier: '', rest: m[2] }
+
+  m = a.match(/^(have|has|had)\s+not\s+(.+)$/i)
+  if (m) return { aux: m[1].toLowerCase(), negative: true, modifier: '', rest: m[2] }
+
+  m = a.match(/^(have|has|had)\s+(never|already|just|ever)\s+(.+)$/i)
+  if (m) return { aux: m[1].toLowerCase(), negative: false, modifier: m[2].toLowerCase(), rest: m[3] }
+
+  m = a.match(/^(have|has|had)\s+(.+)$/i)
+  if (m) return { aux: m[1].toLowerCase(), negative: false, modifier: '', rest: m[2] }
+
+  return null
+}
+
+/** Grammatically valid verb phrases — real tense/person forms that could be correct elsewhere */
+function validTensePhrases(base, particle = '') {
+  const b = base.toLowerCase()
+  const p = particle ? ` ${particle}` : ''
+  const s = thirdPerson(b)
+  const ing = ingForm(b)
+  const past = pastForm(b)
+  const pp = ppForm(b)
+
+  const phrases = [
+    past + p,
+    s + p,
+    `is ${ing}${p}`,
+    `was ${ing}${p}`,
+    `are ${ing}${p}`,
+    `were ${ing}${p}`,
+    `has ${pp}${p}`,
+    `have ${pp}${p}`,
+    `had ${pp}${p}`,
+    `hasn't ${pp}${p}`,
+    `haven't ${pp}${p}`,
+    `hadn't ${pp}${p}`,
+    `has not ${pp}${p}`,
+    `have not ${pp}${p}`,
+    `has been ${ing}${p}`,
+    `have been ${ing}${p}`,
+    `doesn't ${b}${p}`,
+    `don't ${b}${p}`,
+    `didn't ${b}${p}`,
+    `will ${b}${p}`,
+    `won't ${b}${p}`,
+    `is going to ${b}${p}`,
+    `was going to ${b}${p}`,
+    `can ${b}${p}`,
+    `could ${b}${p}`,
+  ]
+
+  for (const mod of ['never', 'already', 'just', 'ever']) {
+    for (const a of ['has', 'have', 'had']) {
+      phrases.push(`${a} ${mod} ${pp}${p}`)
+    }
+  }
+
+  return uniq(phrases)
+}
+
 /** All morphological + Israeli-mistake variants for a verb base */
 function verbMorphVariants(base, particle = '') {
   const b = base.toLowerCase()
+  if (CONTRACTION_AUX.has(b)) return []
   const p = particle ? ` ${particle}` : ''
   const s = thirdPerson(b)
   const ing = ingForm(b)
@@ -191,6 +261,8 @@ function verbMorphVariants(base, particle = '') {
 /** Variants for phrasal verbs: "wakes up", "going to visit" */
 function phrasalVariants(answer) {
   const a = answer.trim()
+  if (parseHaveAnswer(a)) return presentPerfectVariants(a)
+
   const m = a.match(/^(\S+)\s+(\S+)$/i)
   if (!m) return verbMorphVariants(guessBase(a))
 
@@ -232,79 +304,15 @@ function presentSimpleNegativeVariants(answer) {
 }
 
 function presentPerfectVariants(answer) {
-  const parts = []
-  const a = answer.trim()
+  const parsed = parseHaveAnswer(answer)
+  if (!parsed) return []
 
-  // auxiliary swaps (have/has/had — classic Israeli confusion)
-  parts.push(
-    a.replace(/^have /i, 'has '),
-    a.replace(/^have /i, 'had '),
-    a.replace(/^has /i, 'have '),
-    a.replace(/^has /i, 'had '),
-    a.replace(/^had /i, 'have '),
-    a.replace(/^had /i, 'has '),
-  )
+  const words = parsed.rest.split(/\s+/)
+  const mainWord = words[0]
+  const particle = words.slice(1).join(' ')
+  const base = guessBase(mainWord)
 
-  // Israeli: past simple instead of present perfect
-  if (/never/.test(a)) {
-    parts.push(
-      a.replace(/have never/, 'has never'),
-      a.replace(/have never/, 'had never'),
-      a.replace(/have never/, 'have ever'),
-      a.replace(/never (\w+)/, 'ever $1'),
-      a.replace(/have never been/, 'was never'),
-      a.replace(/have never been/, 'went never'),
-      a.replace(/have never/, "don't never"),
-    )
-  }
-  if (/already/.test(a)) {
-    parts.push(
-      a.replace(/have already/, 'has already'),
-      a.replace(/have already/, 'had already'),
-      a.replace(/already /, ''),
-      a.replace(/already /, 'yet '),
-    )
-  }
-  if (/just/.test(a)) {
-    parts.push(
-      a.replace(/have just/, 'has just'),
-      a.replace(/have just/, 'had just'),
-      a.replace(/just /, 'already '),
-      a.replace(/just /, 'yet '),
-    )
-  }
-  if (/not|n't/.test(a)) {
-    parts.push(
-      a.replace(/^have /i, 'has '),
-      a.replace(/haven't/, "hasn't"),
-      a.replace(/haven't/, "don't"),
-      a.replace(/hasn't/, "haven't"),
-      a.replace(/not /, ''),
-      a.replace(/not /, 'yet '),
-    )
-  }
-
-  // Israeli: wrong participle — use past simple after have/has
-  const verbMatch = a.match(/(?:have|has|had)\s+(?:never|already|just|not|n't)?\s*(\w+)/i)
-  if (verbMatch) {
-    const word = verbMatch[1]
-    const base = guessBase(word)
-    const past = pastForm(base)
-    const pp = ppForm(base)
-    const baseForm = base
-    parts.push(
-      a.replace(word, past),
-      a.replace(word, baseForm),
-      a.replace(word, ingForm(base)),
-      a.replace(word, pp + 'ed'),
-    )
-  }
-
-  // Israeli: was/were instead of have/has
-  if (/^have /i.test(a)) parts.push(a.replace(/^have /, 'was '))
-  if (/^has /i.test(a)) parts.push(a.replace(/^has /, 'was '))
-
-  return uniq(parts)
+  return validTensePhrases(base, particle).filter((phrase) => norm(phrase) !== norm(answer))
 }
 
 function passiveVariants(answer) {
@@ -606,6 +614,7 @@ function partDistractors(part) {
   }
   if (/^(was|were|is|are|am)\s+\S+/i.test(p)) return pastContinuousVariants(p)
   if (/^(have|has|had)\s/i.test(p)) return presentPerfectVariants(p)
+  if (/^(haven't|hasn't|hadn't)\s/i.test(p)) return presentPerfectVariants(p)
   if (/^would have\s/i.test(p)) return conditionalVariants(p)
   if (/^would not have\s/i.test(p)) return conditionalVariants(p)
   if (/^(don't|doesn't|didn't)\s/i.test(p)) return presentSimpleNegativeVariants(p)
@@ -644,6 +653,7 @@ function detectType(answer) {
   if (/^just\s/i.test(a)) return 'just_adverb'
   if (/^(was|were|is|are|am)\s+\S+ing$/i.test(a)) return 'past_continuous'
   if (/^(was|were|is|are|am)\s+\S+/i.test(a) && /going|writing|visiting/i.test(a)) return 'future'
+  if (/^(haven't|hasn't|hadn't)\s/i.test(a)) return 'present_perfect'
   if (/^(have|has|had)\s/i.test(a)) return 'present_perfect'
   if (/^(was|were|is|are)\s+\S+$/i.test(a) && /made|built|sent|served|spoken/i.test(a)) return 'passive'
   if (/^will\s|^would\s|^won$|^am going|^is going|^are going|^am writing/i.test(a)) return 'conditional'

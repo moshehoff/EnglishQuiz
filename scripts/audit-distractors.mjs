@@ -13,6 +13,9 @@ const BAD_PATTERNS = [
   { re: /^(was ing|is ing|will )$/i, type: 'garbage' },
   { re: /^justing |justs |justed /i, type: 'bad-just' },
   { re: /wellly/i, type: 'bad-adverb' },
+  { re: /n't(ing|ed|s)\s/i, type: 'bad-contraction-morph' },
+  { re: /^(is|are)\s+hasn't/i, type: 'bad-contraction-morph' },
+  { re: /(haven't|hasn't|hadn't) \S+ing\b/i, type: 'invalid-pp-aux' },
 ]
 
 const issues = []
@@ -56,6 +59,8 @@ const checks = [
   ['an', /^(a|an|the|some|any|—|this|that)$/],
   ['the', /^(a|an|the|some|any|—|this|that)$/],
   ['just arrived', /just|arriv/i],
+  ["hasn't finished", (w) => /finish/i.test(w) && !/(hasn't|haven't|hadn't) \w+ing\b/i.test(w)],
+  ["hasn't seen", (w) => /see|saw|seen/i.test(w) && !/(hasn't|haven't|hadn't) \w+ing\b/i.test(w)],
 ]
 console.log('\nSpot checks:')
 for (const [answer, pattern] of checks) {

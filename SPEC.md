@@ -2,8 +2,14 @@
 
 **פרויקט:** `C:\projects\EnglishQuiz`  
 **מבוסס על:** `c:\projects\trivia`  
-**מקור שאלות:** `C:\projects\english\more\Worksheet_*_Questions.md` + `Answer_Key_*`  
-**מקור הסברים:** `C:\projects\english\Worksheet_*_Answers.md` (+ השלמה מ-Answer Key)
+**מקור שאלות (ב-repo):**
+- `data/more/` — Worksheets 1–5 (עברית) + Answer Keys
+- `data/Worksheet_1–4_Questions.md` + `Worksheet_X_Answers.md`
+- `data/more2/present_perfect.md`, `data/more2/conditional.md`
+
+**מקור הסברים:** קבצי Answers + Answer Keys (+ `scripts/lib/hebrew-explanations.mjs`)
+
+> קבצי ה-MD ב-`data/` נשארים ב-repo כמקור לבנייה (`npm run build:data`) — לא למחוק.
 
 ---
 
@@ -31,11 +37,43 @@
 
 ## שאלות
 
-- 100 שאלות (5 דפים × 20)
+- **240 שאלות** (100 מ-more + 80 מ-Worksheets 1–4 + 40 present perfect + 20 conditionals)
 - **ללא ID**, **עם category** לשליפת הסבר
 - **ללא רמזים** בסוגריים — `(never / be)` וכו' מוסרים
-- שאלות כפולות: תשובה משולבת (`was studying / was making`, `in / in`)
-- 6 מסיחים **בהקשר הנכון** (למשל `in` → `at`, `on`, `by`…)
+- שאלות כפולות: תשובה משולבת (`was studying / was making`, `in / in`, `rains / will stay`)
+- 6 מסיחים לכל שאלה
+
+## מסיחים (distractors)
+
+מחולל: `scripts/lib/distractors.mjs` — רץ בכל `npm run build:data`.
+
+### עקרונות
+
+1. **מבוסס על הפועל בתשובה הנכונה** — לא מאגר סטטי לפי קטגוריה בלבד.
+2. **אנגלית תקינה בלבד** — כל מסיח חייב להיות צירוף דקדוקי אמיתי שיכול להיות תשובה נכונה **בהקשר אחר** (זמן/גוף אחר), לא צירוף שבור.
+3. **טעויות נפוצות בישראל** — רק כשהן עדיין אנגלית תקינה (למשל `haven't finished` במקום `hasn't finished`, או `finished` במקום Present Perfect).
+
+### דוגמה — Present Perfect שלילי
+
+שאלה: `He __________ his homework yet.`  
+תשובה: `hasn't finished`
+
+| מסיח | למה |
+|------|-----|
+| `finished` | Past Simple |
+| `finishes` | Present Simple |
+| `is finishing` | Present Continuous |
+| `had finished` | Past Perfect |
+| `has finished` | Present Perfect חיובי |
+
+**אסור:** צירופים לא תקינים כמו `hasn't finishing`, `hasn't finish`, `hasn'ted finished`.
+
+### מימוש טכני
+
+- `parseHaveAnswer()` — מזהה גם קיצורים: `hasn't`, `haven't`, `hadn't`, `have not`
+- `validTensePhrases()` — מייצר הטיות תקינות של אותו פועל (Simple, Continuous, Perfect, שלילות, עתיד)
+- `detectType()` — לא מטפל בקיצורי עזר (`hasn't`) כפועל רגיל
+- ביקורת: `scripts/audit-distractors.mjs`
 
 ## הסברים
 
@@ -49,14 +87,18 @@
 ## קבצים
 
 ```
-scripts/build-data.mjs     → questions.json + explanations.json
+scripts/build-data.mjs          → questions.json + explanations.json
+scripts/lib/distractors.mjs     → מחולל מסיחים
+scripts/lib/hint-answers.mjs    → תשובות מ-hints (more2)
+scripts/audit-distractors.mjs   → ביקורת איכות מסיחים
+data/                           → מקור MD (לא למחוק)
 public/questions.json
 public/explanations.json
-src/game.ts                → 6 אפשרויות, פאנל הסבר
+src/game.ts                     → 6 אפשרויות, פאנל הסבר
 ```
 
 ---
 
 ## פריסה
 
-GitHub Pages — `base: './'` ב-Vite.
+GitHub Pages — `base: '/EnglishQuiz/'` ב-Vite, workflow ב-`.github/workflows/`.
