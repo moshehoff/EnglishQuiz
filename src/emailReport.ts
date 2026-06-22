@@ -1,12 +1,12 @@
+import type { Player } from './players.ts'
+
 export type WrongChoiceLine = { prompt: string; chosen: string }
 
 export type SessionReportPayload = {
   wrongLines: WrongChoiceLine[]
   correctCount: number
+  player: Player
 }
-
-const RECIPIENT = 'moshe.hoffman@gmail.com'
-const PLAYER_NAME = 'יהונתן'
 
 function formatMessage(payload: SessionReportPayload): string {
   const header = `מספר תשובות נכונות שנענו: ${payload.correctCount}\n\n`
@@ -22,12 +22,12 @@ export function sendSessionReportEmail(
   opts?: { keepalive?: boolean },
 ): void {
   if (payload.wrongLines.length === 0 && payload.correctCount === 0) return
-  const url = `https://formsubmit.co/ajax/${encodeURIComponent(RECIPIENT)}`
+  const url = `https://formsubmit.co/ajax/${encodeURIComponent(payload.player.email)}`
   const message = formatMessage(payload)
-  const subject = `סיכום תרגול אנגלית — ${PLAYER_NAME}`
+  const subject = `סיכום תרגול אנגלית — ${payload.player.name}`
   const body = JSON.stringify({
     _subject: subject,
-    name: `תרגול דקדוק (${PLAYER_NAME})`,
+    name: `תרגול דקדוק (${payload.player.name})`,
     message,
     _captcha: 'false',
   })

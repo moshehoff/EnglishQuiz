@@ -3,6 +3,8 @@ import type { ExplanationsMap, Question } from './types.ts'
 import { isQuestion } from './types.ts'
 import { sendSessionReportEmail } from './emailReport.ts'
 import type { WrongChoiceLine } from './emailReport.ts'
+import { DEFAULT_PLAYER, PLAYERS, findPlayer } from './players.ts'
+import type { Player } from './players.ts'
 import {
   playClick,
   playCorrectHalfRandom,
@@ -14,9 +16,10 @@ import {
 } from './sounds.ts'
 
 const MUTE_KEY = 'english-quiz-muted'
+const PLAYER_KEY = 'english-quiz-player'
 const AUTO_ADVANCE_AFTER_CORRECT_MS = 3000
 const AUTO_ADVANCE_AFTER_REVEAL_MS = 7000
-const DELAY_BEFORE_RETRY_MS = 5000
+const WRONG_ANSWER_DELAY_MS = 9000
 const RETRY_SAME_QUESTION_AFTER = 3
 const WRONG_PENALTY_POINTS = 5
 
@@ -25,7 +28,7 @@ type Phase = 'loading' | 'error' | 'splash' | 'answering' | 'wrong' | 'correct' 
 
 const UI = {
   title: 'תרגול דקדוק באנגלית',
-  greeting: 'שלום יהונתן!',
+  choosePlayer: 'מי משחק?',
   chooseLevel: 'בחר רמה:',
   levelEasy: 'מתחילים — 100 נקודות',
   levelMid: 'בינוני — 200 נקודות',
@@ -47,6 +50,26 @@ const UI = {
   winSub: 'כל הכבוד!',
   home: 'למסך הראשי',
 } as const
+
+function greetingFor(player: Player): string {
+  return `שלום ${player.name}!`
+}
+
+function loadPlayer(): Player {
+  try {
+    return findPlayer(localStorage.getItem(PLAYER_KEY))
+  } catch {
+    return DEFAULT_PLAYER
+  }
+}
+
+function savePlayer(player: Player): void {
+  try {
+    localStorage.setItem(PLAYER_KEY, player.id)
+  } catch {
+    /* ignore */
+  }
+}
 
 function winTitleFor(target: TargetScore): string {
   if (target === 100) return 'הגעת ל-100 נקודות!'
@@ -169,6 +192,7 @@ export function mountGame(root: HTMLElement): () => void {
   let wrongLog: WrongChoiceLine[] = []
   let correctAnswersCount = 0
   let muted = loadMuted()
+  let currentPlayer = loadPlayer()
   let advanceTimer: ReturnType<typeof setTimeout> | null = null
   let wrongRetryIntervalId: ReturnType<typeof setInterval> | null = null
   let wrongRetryUnlockAt = 0
@@ -229,7 +253,10 @@ export function mountGame(root: HTMLElement): () => void {
     wrongLog.length = 0
     const correctSnapshot = correctAnswersCount
     correctAnswersCount = 0
-    sendSessionReportEmail({ wrongLines: wrongSnapshot, correctCount: correctSnapshot }, opts)
+    sendSessionReportEmail(
+      { wrongLines: wrongSnapshot, correctCount: correctSnapshot, player: currentPlayer },
+      opts,
+    )
   }
 
   const goToHome = () => {
@@ -407,8 +434,36 @@ export function mountGame(root: HTMLElement): () => void {
       } else {
         const greet = document.createElement('p')
         greet.className = 'splash-greeting'
-        greet.textContent = UI.greeting
+        greet.textContent = greetingFor(currentPlayer)
         main.appendChild(greet)
+
+        if (PLAYERS.length > 1) {
+          const playerSub = document.createElement('p')
+          playerSub.className = 'splash-sub'
+          playerSub.textContent = UI.choosePlayer
+          main.appendChild(playerSub)
+          const playerRow = document.createElement('div')
+          playerRow.className = 'player-row'
+          for (const p of PLAYERS) {
+            const b = document.createElement('button')
+            b.type = 'button'
+            b.className =
+              p.id === currentPlayer.id
+                ? 'btn btn-primary btn-player btn-player--active'
+                : 'btn btn-ghost btn-player'
+            b.textContent = p.name
+            b.addEventListener('click', () => {
+              void resumeAudio()
+              playClick(muted)
+              currentPlayer = p
+              savePlayer(p)
+              render()
+            })
+            playerRow.appendChild(b)
+          }
+          main.appendChild(playerRow)
+        }
+
         const sub = document.createElement('p')
         sub.className = 'splash-sub'
         sub.textContent = UI.chooseLevel
@@ -528,14 +583,14 @@ export function mountGame(root: HTMLElement): () => void {
       addScore(-WRONG_PENALTY_POINTS)
       if (wrongCount >= 2) {
         playWrongFinalRandom(muted)
-        wrongRetryUnlockAt = Date.now() + DELAY_BEFORE_RETRY_MS
+        wrongRetryUnlockAt = Date.now() + WRONG_ANSWER_DELAY_MS
         startUnlockTicker('revealed')
         phase = 'revealed'
         render()
         scheduleAdvance(AUTO_ADVANCE_AFTER_REVEAL_MS)
       } else {
         playWrongRandom(muted)
-        wrongRetryUnlockAt = Date.now() + DELAY_BEFORE_RETRY_MS
+        wrongRetryUnlockAt = Date.now() + WRONG_ANSWER_DELAY_MS
         startUnlockTicker('wrong')
         phase = 'wrong'
         render()

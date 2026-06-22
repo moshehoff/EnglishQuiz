@@ -180,6 +180,25 @@ body {
   color: var(--muted);
 }
 
+.player-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 0 18px;
+}
+
+.btn-player {
+  flex: 1 1 auto;
+  min-width: 6rem;
+}
+
+.btn-player--active {
+  font-weight: 700;
+}
+
 .level-row {
   display: flex;
   flex-direction: column;
