@@ -578,7 +578,12 @@ export function mountGame(root: HTMLElement): () => void {
       wrongCount += 1
       lastWrongDisplayIndex = displayIdx
       currentQuestionHadWrong = true
-      wrongLog.push({ prompt: q.prompt, chosen: displayLabels[displayIdx] })
+      wrongLog.push({
+        prompt: q.prompt,
+        chosen: displayLabels[displayIdx],
+        category: q.category,
+        categoryTitle: explanations[q.category]?.title ?? q.category.replace(/_/g, ' '),
+      })
       pendingPointsPop = { amount: -5 }
       addScore(-WRONG_PENALTY_POINTS)
       if (wrongCount >= 2) {

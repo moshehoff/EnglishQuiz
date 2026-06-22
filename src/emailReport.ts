@@ -1,6 +1,11 @@
 import type { Player } from './players.ts'
 
-export type WrongChoiceLine = { prompt: string; chosen: string }
+export type WrongChoiceLine = {
+  prompt: string
+  chosen: string
+  category: string
+  categoryTitle: string
+}
 
 export type SessionReportPayload = {
   wrongLines: WrongChoiceLine[]
@@ -9,12 +14,38 @@ export type SessionReportPayload = {
 }
 
 function formatMessage(payload: SessionReportPayload): string {
-  const header = `מספר תשובות נכונות שנענו: ${payload.correctCount}\n\n`
-  if (payload.wrongLines.length === 0) {
-    return `${header}לא נרשמו בחירות שגויות.`
+  const lines: string[] = [
+    `מספר תשובות נכונות: ${payload.correctCount}`,
+    `מספר טעויות: ${payload.wrongLines.length}`,
+  ]
+
+  if (payload.wrongLines.length === 0) return lines.join('\n')
+
+  lines.push('')
+
+  const byCategory = new Map<string, { title: string; items: WrongChoiceLine[] }>()
+  for (const w of payload.wrongLines) {
+    const group = byCategory.get(w.category) ?? { title: w.categoryTitle, items: [] }
+    group.items.push(w)
+    byCategory.set(w.category, group)
   }
-  const body = payload.wrongLines.map((l) => `${l.prompt}\nנבחר: ${l.chosen}`).join('\n\n')
-  return `${header}${body}`
+
+  const groups = [...byCategory.values()].sort((a, b) => {
+    const byCount = b.items.length - a.items.length
+    return byCount !== 0 ? byCount : a.title.localeCompare(b.title, 'he')
+  })
+
+  for (const group of groups) {
+    const label = group.items.length === 1 ? 'טעות' : 'טעויות'
+    lines.push(`${group.title}: ${group.items.length} ${label}`)
+    for (const w of group.items) {
+      lines.push(w.prompt)
+      lines.push(`נבחר: ${w.chosen}`)
+      lines.push('')
+    }
+  }
+
+  return lines.join('\n').trimEnd()
 }
 
 export function sendSessionReportEmail(
