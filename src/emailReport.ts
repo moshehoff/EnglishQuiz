@@ -3,6 +3,7 @@ import type { Player } from './players.ts'
 export type WrongChoiceLine = {
   prompt: string
   chosen: string
+  correct: string
   category: string
   categoryTitle: string
 }
@@ -41,6 +42,7 @@ function formatMessage(payload: SessionReportPayload): string {
     for (const w of group.items) {
       lines.push(w.prompt)
       lines.push(`נבחר: ${w.chosen}`)
+      lines.push(`במקום: ${w.correct}`)
       lines.push('')
     }
   }

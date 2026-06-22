@@ -581,6 +581,7 @@ export function mountGame(root: HTMLElement): () => void {
       wrongLog.push({
         prompt: q.prompt,
         chosen: displayLabels[displayIdx],
+        correct: q.options[q.correctIndex],
         category: q.category,
         categoryTitle: explanations[q.category]?.title ?? q.category.replace(/_/g, ' '),
       })
